@@ -13,7 +13,7 @@ const Menu = (): JSX.Element => {
                 <Link to={'/'}>Кинотеатры</Link>
             </li>
             <li>
-                <Link to={'/'}>О компании</Link>
+                <Link to={'/about'}>О компании</Link>
             </li>
             <li>
                 <Link to={'/contact'}>Контакты</Link>
