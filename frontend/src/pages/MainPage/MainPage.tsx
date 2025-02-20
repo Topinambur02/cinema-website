@@ -1,9 +1,9 @@
 import { JSX } from 'react'
-import Movie from '../components/Movie/Movie'
-import { movies } from '../db/Movies'
-import { MovieType } from '../types/MovieType'
+import Movie from '../../components/Movie/Movie'
+import { movies } from '../../db/Movies'
+import { MovieType } from '../../types/MovieType'
 import styles from './MainPage.module.scss'
-import Menu from '../components/menu/Menu'
+import Menu from '../../components/menu/Menu'
 
 const MainPage = (): JSX.Element => {
   return (
