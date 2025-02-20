@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build"
   },
   "dependencies": {
+    "@pbe/react-yandex-maps": "^1.2.5",
     "axios": "^1.7.9",
     "formik": "^2.4.6",
     "lucide-react": "^0.475.0",
