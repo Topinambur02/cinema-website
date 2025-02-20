@@ -1,3 +1,4 @@
 export const MAIN_ROUTE = '/'
 export const CONTACT_ROUTE = '/contact'
 export const ABOUT_ROUTE = '/about'
+export const CINEMAS_ROUTE = '/cinemas'
