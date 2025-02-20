@@ -16,7 +16,7 @@ const Menu = (): JSX.Element => {
                 <Link to={'/'}>О компании</Link>
             </li>
             <li>
-                <Link to={'/'}>Контакты</Link>
+                <Link to={'/contact'}>Контакты</Link>
             </li>
         </ul>
     </div>
