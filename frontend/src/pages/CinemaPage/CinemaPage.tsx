@@ -1,18 +1,13 @@
-import Menu from '../../components/menu/Menu'
 import YandexMap from '../../components/yandexMap/YandexMap'
+import Layout from '../Layout'
 import styles from './CinemaPage.module.scss'
 
 const CinemaPage = () => {
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <Menu />
-        <div className={styles.content}>
-          <h1>Кинотеатры в Москве</h1>
-          <YandexMap />
-        </div>
-      </div>
-    </div>
+    <Layout>
+      <h1 className={styles.title}>Кинотеатры в Москве</h1>
+      <YandexMap />
+    </Layout>
   )
 }
 

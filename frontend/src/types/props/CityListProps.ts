@@ -1,4 +1,4 @@
 export interface CityListProps {
-    visible: boolean
-    setVisible: (value: boolean) => void
+  visible: boolean
+  setVisible: (value: boolean) => void
 }

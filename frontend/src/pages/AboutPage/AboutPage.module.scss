@@ -1,95 +1,60 @@
-.page {
-    position: relative;
-    z-index: 1;
-    padding-bottom: 50px;
-    flex-shrink: 0;
-    flex-grow: 1;
+h1 {
+  margin-top: 24px;
+  font-size: 40px;
+}
 
-    .container {
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 15px;
-        padding-right: 15px;
-        max-width: 1364px;
-        display: flex;
+.aboutBlock {
+  .progressList {
+    display: flex;
+    margin: 0 -8px;
+    padding-top: 8px;
 
-        .content {
-            width: calc(100% - 144px);
-            padding-left: 16px;
-            letter-spacing: -0.5px;
+    .item {
+      width: calc(25% - 16px);
+      padding: 16px 16px 60px;
+      margin: 16px 8px 0;
+      background: #1c1f23;
+      border-radius: 16px;
+      font-weight: bold;
+      font-size: 18px;
 
-            h1 {
-                margin-top: 24px;
-                font-size: 40px;
-                line-height: 48px;
-                letter-spacing: -2px;
-            }
-
-            .aboutBlock {
-                .progressList {
-                    display: flex;
-                    flex-wrap: wrap;
-                    margin: 0 -8px;
-                    padding-top: 8px;
-
-                    .item {
-                        width: calc(25% - 16px);
-                        display: block;
-                        padding: 16px 16px 60px;
-                        margin: 16px 8px 0;
-                        background: #1C1F23;
-                        border-radius: 16px;
-                        font-weight: bold;
-                        font-size: 18px;
-                        line-height: 24px;
-
-                        .value {
-                            margin-bottom: 8px;
-                            font-size: 40px;
-                            line-height: 48px;
-                            letter-spacing: -2px;
-                            margin-right: 13px;
-                        }
-                    }
-                }
-
-                .row {
-                    display: flex;
-                    flex-wrap: wrap;
-                    margin-right: -15px;
-                    margin-left: -15px;
-
-                    .block {
-                        max-width: 33.333333%;
-                        padding-left: 15px;
-                        padding-right: 15px;
-
-                        .title {
-                            margin-top: 32px;
-                            font-weight: bold;
-                            font-size: 24px;
-                            line-height: 32px;
-                            letter-spacing: -1px;
-                        }
-
-                        .text {
-                            .paragraph {
-                                font-weight: 500;
-                                margin-top: 40px;
-                                font-size: 16px;
-                                line-height: 24px;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+      .value {
+        margin-bottom: 8px;
+        font-size: 40px;
+        margin-right: 13px;
+      }
     }
+  }
+
+  .row {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+
+    .block {
+      max-width: 33.333333%;
+      padding-left: 15px;
+      padding-right: 15px;
+
+      .title {
+        margin-top: 32px;
+        font-weight: bold;
+        font-size: 24px;
+      }
+
+      .text {
+        .paragraph {
+          font-weight: 500;
+          margin-top: 40px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
 }
 
 .rb {
-    background: #E3000B;
-    padding-left: 5px;
-    color: #fff;
+  background: #e3000b;
+  padding-left: 5px;
+  color: #fff;
 }

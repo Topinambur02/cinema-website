@@ -1,86 +1,56 @@
 .header {
-    margin-top: 20px;
-    position: relative;
-    z-index: 80;
-    background: black;
+  margin-top: 20px;
 
-    .container {
-        width: 100%;
-        padding-right: 16px;
-        padding-left: 16px;
-        margin-left: auto;
-        margin-right: auto;
+  .container {
+    padding-left: 16px;
 
-        .wrapper {
-            position: relative;
-            height: 40px;
-            display: flex;
-            align-items: center;
+    .wrapper {
+      height: 40px;
+      display: flex;
+      align-items: center;
 
-            .logo {
-                width: 100px;
+      .logo {
+        width: 100px;
 
-                img {
-                    width: 100%;
-                }
-            }
-
-            .city {
-                position: relative;
-                margin-left: 40px;
-
-                .cityLink {
-                    display: inline-flex;
-                    align-items: center;
-                    text-decoration: none;
-                    letter-spacing: -0.5px;
-                    color: #1DB1BA;
-                    font-weight: 600;
-                    font-size: 16px;
-                    line-height: 24px;
-                    height: 56px;
-
-                    .icon {
-                        width: 24px;
-                        height: 24px;
-                        margin-right: 8px;
-                        color: white;
-                    }
-                }
-            }
-
-            .cart {
-                position: relative;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 40px;
-                height: 40px;
-                margin: 0px 16px 0px auto;
-            }
-
-            .user {
-                background-color: #1C1F23;
-                border-radius: 12px;
-                height: 40px;
-                padding: 0 8px;
-                display: flex;
-                align-items: center;
-
-                .userIcon {
-                    margin-left: 7px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 24px;
-                    height: 24px;
-
-                    .circleUser {
-                        width: 24px;
-                        height: 24px;
-                    }
-                }
-            }
+        img {
+          width: 100%;
         }
+      }
+
+      .city {
+        margin-left: 40px;
+
+        .cityLink {
+          display: inline-flex;
+          align-items: center;
+          text-decoration: none;
+          color: #1db1ba;
+          font-weight: 600;
+          height: 56px;
+
+          .icon {
+            margin-right: 8px;
+            color: white;
+          }
+        }
+      }
+
+      .user {
+        background-color: #1c1f23;
+        border-radius: 12px;
+        height: 40px;
+        padding: 0 8px;
+        display: flex;
+        align-items: center;
+        margin: 0px 16px 0px auto;
+
+        .userIcon {
+          margin-left: 7px;
+          width: 24px;
+          height: 24px;
+
+        }
+      }
     }
+  }
 }
