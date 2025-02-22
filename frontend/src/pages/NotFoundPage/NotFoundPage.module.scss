@@ -1,0 +1,37 @@
+.page {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    flex-grow: 1;
+
+    .container {
+        display: flex;
+        max-width: 1364px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+
+        .formBox {
+            padding-top: 24px;
+            margin: 0 auto;
+            max-width: 464px;
+            text-align: center;
+
+            h1 {
+                margin-top: 24px;
+                font-size: 40px;
+                line-height: 48px;
+                letter-spacing: -2px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+                line-height: 32px;
+                margin-top: 16px;
+                color: #8B919B;
+                font-weight: 500;
+            }
+        }
+    }
+}
