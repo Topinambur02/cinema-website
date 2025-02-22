@@ -1,6 +1,6 @@
-import { JSX } from "react";
+import { JSX } from 'react'
 
-export type RouteType = { 
-    path: string 
-    component: JSX.Element 
+export type RouteType = {
+  path: string
+  component: JSX.Element
 }

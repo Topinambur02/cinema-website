@@ -7,7 +7,7 @@ import { JSX } from 'react'
 
 function App(): JSX.Element {
   return (
-    <div className='App'>
+    <div className="App">
       <BrowserRouter>
         <Header />
         <AppRouter />

@@ -10,8 +10,7 @@ body {
     position: relative;
     font-size: 14px;
     color: white;
-    text-size-adjust: 100%;
-    font-family: Montserrat, sans-serif;
+    font-family: sans-serif;
 }
 
 a {
@@ -22,7 +21,6 @@ a {
 
 .App {
     position: relative;
-    z-index: 10;
     min-width: 300px;
     max-width: 1364px;
     min-height: 100vh;

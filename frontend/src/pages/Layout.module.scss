@@ -1,0 +1,14 @@
+.page {
+  padding-bottom: 50px;
+  flex-grow: 1;
+
+  .container {
+    display: flex;
+    max-width: 1364px;
+
+    .content {
+      width: calc(100% - 144px);
+      padding-left: 16px;
+    }
+  }
+}
