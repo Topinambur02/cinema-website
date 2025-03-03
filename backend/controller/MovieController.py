@@ -1,7 +1,7 @@
 from fastapi import APIRouter
-from DTO.CreateMovieDTO import CreateMovieDTO
-from DTO.UpdateMovieDTO import UpdateMovieDTO
-from DTO.MovieDTO import MovieDTO
+from dto.MovieDTO import (
+    MovieDTO, CreateMovieDTO, UpdateMovieDTO
+)
 from service.MovieService import service
 
 movie_router = APIRouter()
