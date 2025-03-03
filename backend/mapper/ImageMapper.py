@@ -1,7 +1,7 @@
+from dto.ImageDTO import DTOType
 from model.Base import ModelType
-from dto.MovieDTO import DTOType
 
-class MovieMapper:
+class ImageMapper:
     @classmethod
     def to_dto(cls, orm_model: ModelType, dto_model: DTOType) -> DTOType:
         return dto_model.model_validate(orm_model, from_attributes=True)

@@ -1,8 +1,10 @@
 from repository.MovieRepository import repository
 from mapper.MovieMapper import MovieMapper as mapper
-from DTO.MovieDTO import MovieDTO
-from DTO.CreateMovieDTO import CreateMovieDTO
-from DTO.UpdateMovieDTO import UpdateMovieDTO
+from dto.MovieDTO import (
+    MovieDTO, 
+    CreateMovieDTO, 
+    UpdateMovieDTO
+)
 
 class MovieService:
     async def get_all(self) -> list[MovieDTO]:

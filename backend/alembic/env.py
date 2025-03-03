@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from model.Base import Base
 from model.Movie import Movie
+from model.Image import Image
 
 from Config import settings
 

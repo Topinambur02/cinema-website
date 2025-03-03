@@ -7,4 +7,16 @@ class MovieDTO(BaseModel):
     imageID: int
     ageLimit: str
 
+class CreateMovieDTO(BaseModel):
+    name: str
+    imageID: int
+    ageLimit: str
+
+class UpdateMovieDTO(BaseModel):
+    name: str
+    imageID: int
+    ageLimit: str
+
 DTOType = TypeVar("DTOType", bound=MovieDTO)
+CreateDTOType = TypeVar("CreateDTOType", bound=CreateMovieDTO)
+UpdateDTOType = TypeVar("UpdateDTOType", bound=UpdateMovieDTO)
