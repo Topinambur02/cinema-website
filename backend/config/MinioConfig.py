@@ -2,6 +2,7 @@ import io
 import json
 from minio import Minio
 from fastapi import UploadFile
+from config.LogConfig import logger
 
 class MinioConfig:
     def __init__(self, url: str, access_key: str, secret_key: str):
@@ -32,9 +33,9 @@ class MinioConfig:
                 ]
             }
             self.client.set_bucket_policy("images", json.dumps(policy))
-            print("Bucket created")
+            logger.info("Bucket created")
         else:
-            print("Bucket already exists")
+            logger.warning("Bucket already exists")
 
     async def upload_file(self, file: UploadFile):
         file_data = await file.read()
