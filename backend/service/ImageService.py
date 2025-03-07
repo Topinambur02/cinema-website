@@ -1,3 +1,4 @@
+from exception.ImageNotFoundException import ImageNotFoundException
 from dto.ImageDTO import ImageDTO
 from repository.ImageRepository import repository
 from mapper.ImageMapper import ImageMapper as mapper
@@ -10,6 +11,9 @@ class ImageService:
         return [mapper.to_dto(dto_model=ImageDTO, orm_model=image) for image in images]
     
     async def get_by_id(self, id: int) -> ImageDTO:
+        if await repository.get_by_id(id) is None:
+            raise ImageNotFoundException()
+        
         image = await repository.get_by_id(id)
         return mapper.to_dto(dto_model=ImageDTO, orm_model=image)
     
@@ -26,6 +30,9 @@ class ImageService:
         return mapper.to_dto(dto_model=ImageDTO, orm_model=created_image)
     
     async def update(self, id: int, image: UploadFile) -> ImageDTO:
+        if await repository.get_by_id(id) is None:
+            raise ImageNotFoundException()
+
         await minio.upload_file(image)
 
         image_dict = {
@@ -39,7 +46,8 @@ class ImageService:
     
     async def delete(self, id: int) -> None:
         if await repository.get_by_id(id) is None:
-            raise HTTPException(status_code=404, detail="Image not found")
+            raise ImageNotFoundException()
+        
         image = await repository.delete(id)
         await minio.delete_file(image.name)
 
