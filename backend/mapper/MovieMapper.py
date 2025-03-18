@@ -3,8 +3,18 @@ from dto.MovieDTO import DTOType
 
 class MovieMapper:
     @classmethod
-    def to_dto(cls, orm_model: ModelType, dto_model: DTOType) -> DTOType:
-        return dto_model.model_validate(orm_model, from_attributes=True)
+    def to_dto(cls, dto_model, orm_model, additional_attrs=None) -> DTOType:
+        data = {
+            'id': orm_model.id,
+            'name': orm_model.name,
+            'imageID': orm_model.imageID,
+            'ageLimit': orm_model.ageLimit,
+        }
+
+        if additional_attrs:
+            data.update(additional_attrs)
+
+        return dto_model(**data)
     
     @classmethod
     def to_dict(cls, dto_model: DTOType) -> dict:
