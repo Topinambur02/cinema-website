@@ -1,6 +1,5 @@
 from typing import TypeVar
 from pydantic import BaseModel
-from fastapi import UploadFile
 
 class ImageDTO(BaseModel):
     id: int

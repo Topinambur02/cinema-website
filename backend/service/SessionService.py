@@ -1,9 +1,13 @@
 from exception.MovieNotFoundException import MovieNotFoundException
 from exception.SessionNotFoundException import SessionNotFoundException
-from dto.SessionDTO import CreateSessionDTO, SessionDTO, UpdateSessionDTO
 from repository.SessionRepository import repository
 from repository.MovieRepository import repository as movie_repository
 from mapper.SessionMapper import SessionMapper as mapper
+from dto.SessionDTO import (
+    CreateSessionDTO, 
+    SessionDTO, 
+    UpdateSessionDTO
+)
 
 class SessionService:
     async def get_all(self) -> list[SessionDTO]:
@@ -11,37 +15,52 @@ class SessionService:
         return [mapper.to_dto(dto_model=SessionDTO, orm_model=session) for session in sessions]
     
     async def get_by_id(self, id: int) -> SessionDTO:
-        if await repository.get_by_id(id) is None:
+        session = await repository.get_by_id(id)
+
+        if not(session):
             raise SessionNotFoundException()
 
-        session = await repository.get_by_id(id)
         return mapper.to_dto(dto_model=SessionDTO, orm_model=session)
     
     async def create(self, dto: CreateSessionDTO) -> SessionDTO:
         movie_id = dto.movieId
         movie = await movie_repository.get_by_id(movie_id)
 
-        if movie is None:
+        if not(movie):
             raise MovieNotFoundException()
         
         session_dict = mapper.to_dict(dto)
         created_session = await repository.create(session_dict)
         created_session.movie = movie
+        
         return mapper.to_dto(dto_model=SessionDTO, orm_model=created_session)
     
     async def update(self, id: int, dto: UpdateSessionDTO) -> SessionDTO:
-        if await repository.get_by_id(id) is None:
+        session = await repository.get_by_id(id)
+        movie_id = dto.movieId
+        movie = await movie_repository.get_by_id(movie_id)
+
+        if not(session):
             raise SessionNotFoundException()
+        
+        if not(movie):
+            raise MovieNotFoundException()
 
         session_dict = mapper.to_dict(dto)
-        created_session = await repository.update(id, session_dict)
-        return mapper.to_dto(dto_model=SessionDTO, orm_model=created_session)
+        updated_session = await repository.update(id, session_dict)
+        updated_movie_id = updated_session.movieId
+        new_movie = await movie_repository.get_by_id(updated_movie_id)
+        updated_session.movie = new_movie
+
+        return mapper.to_dto(dto_model=SessionDTO, orm_model=updated_session)
     
     async def delete(self, id: int) -> SessionDTO:
-        if await repository.get_by_id(id) is None:
+        session = await repository.get_by_id(id)
+
+        if not(session):
             raise SessionNotFoundException()
 
-        session = await repository.delete(id)
-        return mapper.to_dto(dto_model=SessionDTO, orm_model=session)
+        deleted_session = await repository.delete(id)
+        return mapper.to_dto(dto_model=SessionDTO, orm_model=deleted_session)
     
 service = SessionService()

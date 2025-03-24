@@ -1,13 +1,13 @@
 from model.Genre import Genre
 from model.Movie import Movie
-from sqlalchemy import delete, select, update
+from sqlalchemy import delete, select
 from db.Session import async_session_maker
 from sqlalchemy.orm import selectinload
 
 class MovieRepository:
     async def get_all(self) -> list[Movie]:
         async with async_session_maker() as session:
-            query = select(Movie).options(selectinload(Movie.genres)).order_by(Movie.id)
+            query = select(Movie).options(selectinload(Movie.genres))
             result = await session.execute(query)
             return result.scalars().all()
         
@@ -34,12 +34,15 @@ class MovieRepository:
 
             return movie
         
-    async def update(self, id: int, movie_data: dict) -> Movie:
+    async def update(self, id: int, movie_dict: dict) -> Movie:
         async with async_session_maker() as session:
-            genres_ids = movie_data.pop('genres_ids', None)
+            genres_ids = movie_dict.pop('genres_ids', None)
             query = select(Movie).options(selectinload(Movie.genres)).where(Movie.id == id)
             result = await session.execute(query)
             movie = result.scalar_one_or_none()
+            
+            for key, value in movie_dict.items():
+                setattr(movie, key, value)
 
             if genres_ids:
                 query_for_genres = select(Genre).where(Genre.id.in_(genres_ids))
@@ -56,8 +59,7 @@ class MovieRepository:
     async def delete(self, id: int) -> Movie:
         async with async_session_maker() as session:
             query = delete(Movie).where(Movie.id == id).returning(Movie)
-            result = await session.execute(query)
+            await session.execute(query)
             await session.commit()
-            return result.scalar_one_or_none()
 
 repository = MovieRepository()

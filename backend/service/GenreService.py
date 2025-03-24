@@ -9,30 +9,39 @@ class GenreService:
         return [mapper.to_dto(dto_model=GenreDTO, orm_model=genre) for genre in genres]
     
     async def get_by_id(self, id: int) -> GenreDTO:
-        if await repository.get_by_id(id) is None:
+        genre = await repository.get_by_id(id)
+
+        if not(genre):
             raise GenreNotFoundException()
 
-        genre = await repository.get_by_id(id)
         return mapper.to_dto(dto_model=GenreDTO, orm_model=genre)
     
+    async def get_by_ids(self, ids: list[int]) -> list[GenreDTO]:
+        genres = await repository.get_by_ids(ids)
+        return [mapper.to_dto(dto_model=GenreDTO, orm_model=genre) for genre in genres]
+    
     async def create(self, dto: CreateGenreDTO) -> GenreDTO:
-        dict_genre = mapper.to_dict(dto)
-        created_genre = await repository.create(dict_genre)
+        genre_dict = mapper.to_dict(dto)
+        created_genre = await repository.create(genre_dict)
         return mapper.to_dto(dto_model=GenreDTO, orm_model=created_genre)
     
     async def update(self, id: int, dto: UpdateGenreDTO) -> GenreDTO:
-        if await repository.get_by_id(id) is None:
+        genre = await repository.get_by_id(id)
+
+        if not(genre):
             raise GenreNotFoundException()
 
-        dict_genre = mapper.to_dict(dto)
-        created_genre = await repository.update(id, dict_genre)
-        return mapper.to_dto(dto_model=GenreDTO, orm_model=created_genre)
+        genre_dict = mapper.to_dict(dto)
+        updated_genre = await repository.update(id, genre_dict)
+        return mapper.to_dto(dto_model=GenreDTO, orm_model=updated_genre)
     
     async def delete(self, id: int) -> GenreDTO:
-        if await repository.get_by_id(id) is None:
+        genre = await repository.get_by_id(id)
+
+        if not(genre):
             raise GenreNotFoundException()
 
-        genre = await repository.delete(id)
-        return mapper.to_dto(dto_model=GenreDTO, orm_model=genre)
+        deleted_genre = await repository.delete(id)
+        return mapper.to_dto(dto_model=GenreDTO, orm_model=deleted_genre)
 
 service = GenreService()

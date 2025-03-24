@@ -1,8 +1,10 @@
 from fastapi import APIRouter
-from dto.MovieDTO import (
-    MovieDTO, CreateMovieDTO, UpdateMovieDTO
-)
 from service.MovieService import service
+from dto.MovieDTO import (
+    MovieDTO, 
+    CreateMovieDTO, 
+    UpdateMovieDTO
+)
 
 movie_router = APIRouter()
 
@@ -23,5 +25,5 @@ async def update(id: int, dto: UpdateMovieDTO) -> MovieDTO:
     return await service.update(id, dto)
 
 @movie_router.delete('/{id}')
-async def delete(id: int) -> MovieDTO:
-    return await service.delete(id)
+async def delete(id: int) -> None:
+    await service.delete(id)

@@ -23,4 +23,5 @@ class Movie(Base):
     genres: Mapped[Optional[list[Genre]]] = relationship(
         secondary=movie_genre_association,
         back_populates="movies",
+        passive_deletes=True
     )

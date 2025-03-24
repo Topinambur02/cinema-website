@@ -1,6 +1,10 @@
 from fastapi import APIRouter
-from dto.SessionDTO import CreateSessionDTO, SessionDTO, UpdateSessionDTO
 from service.SessionService import service
+from dto.SessionDTO import (
+    CreateSessionDTO, 
+    SessionDTO, 
+    UpdateSessionDTO
+)
 
 session_router = APIRouter()
 
