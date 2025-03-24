@@ -1,6 +1,10 @@
 from fastapi import APIRouter
 from service.GenreService import service
-from dto.GenreDTO import CreateGenreDTO, UpdateGenreDTO, GenreDTO
+from dto.GenreDTO import (
+    CreateGenreDTO, 
+    UpdateGenreDTO, 
+    GenreDTO
+)
 
 genre_router = APIRouter()
 

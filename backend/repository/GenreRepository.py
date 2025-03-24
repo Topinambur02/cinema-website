@@ -5,7 +5,7 @@ from sqlalchemy import delete, insert, select, update
 class GenreRepository:
     async def get_all(self) -> list[Genre]:
         async with async_session_maker() as session:
-            query = select(Genre).order_by(Genre.id)
+            query = select(Genre)
             result = await session.execute(query)
             return result.scalars().all()
         
@@ -14,6 +14,12 @@ class GenreRepository:
             query = select(Genre).where(Genre.id == id)
             result = await session.execute(query)
             return result.scalar_one_or_none()
+        
+    async def get_by_ids(self, ids: list[int]) -> list[Genre]:
+        async with async_session_maker() as session:
+            query = select(Genre).where(Genre.id.in_(ids))
+            result = await session.execute(query)
+            return result.scalars().all()
         
     async def create(self, genre: dict) -> Genre:
         async with async_session_maker() as session:

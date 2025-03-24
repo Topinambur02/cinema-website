@@ -1,4 +1,4 @@
-from dto.GenreDTO import DTOType
+from dto.SessionDTO import DTOType
 from model.Base import ModelType
 
 class SessionMapper:

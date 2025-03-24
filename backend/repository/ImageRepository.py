@@ -5,7 +5,7 @@ from db.Session import async_session_maker
 class ImageRepository:
     async def get_all(self) -> list[Image]:
         async with async_session_maker() as session:
-            query = select(Image).order_by(Image.id)
+            query = select(Image)
             result = await session.execute(query)
             return result.scalars().all()
         

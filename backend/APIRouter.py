@@ -6,7 +6,7 @@ from controller.SessionController import session_router
 
 api_router = APIRouter(prefix='/api')
 
-api_router.include_router(movie_router, prefix='/movie')
-api_router.include_router(image_router, prefix='/image')
-api_router.include_router(genre_router, prefix='/genre')
-api_router.include_router(session_router, prefix='/session')
+api_router.include_router(movie_router, prefix='/movie', tags=['movie'])
+api_router.include_router(image_router, prefix='/image', tags=['image'])
+api_router.include_router(genre_router, prefix='/genre', tags=['genre'])
+api_router.include_router(session_router, prefix='/session', tags=['session'])

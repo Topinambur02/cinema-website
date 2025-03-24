@@ -7,5 +7,6 @@ class Genre(Base):
     name: Mapped[str]
     movies: Mapped[Optional[list["Movie"]]] = relationship(
         secondary=movie_genre_association,
-        back_populates="genres"
+        back_populates="genres",
+        passive_deletes=True
     )

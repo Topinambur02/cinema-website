@@ -2,24 +2,36 @@ import io
 import json
 from minio import Minio
 from fastapi import UploadFile
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from config.LogConfig import logger
 
-class MinioConfig:
-    def __init__(self, url: str, access_key: str, secret_key: str):
-        self.url = url
-        self.access_key = access_key
-        self.secret_key = secret_key
+class MinioSettings(BaseSettings):
+    HOST: str
+    PORT: str
+    ACCESS_KEY: str
+    SECRET_KEY: str
 
-        self.client = Minio(
-            endpoint=self.url,
-            access_key=self.access_key,
-            secret_key=self.secret_key,
+    @property
+    def client(self):
+        return Minio(
+            endpoint=f"{self.HOST}:{self.PORT}", 
+            access_key=self.ACCESS_KEY, 
+            secret_key=self.SECRET_KEY, 
             secure=False
         )
 
-        bucket = self.client.bucket_exists("images")
+    model_config = SettingsConfigDict(
+        env_file=".env_s3", 
+        env_prefix="MINIO_",
+        extra='ignore'
+    )
 
-        if not bucket:
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._initialize_bucket()
+
+    def _initialize_bucket(self):
+        if not self.client.bucket_exists("images"):
             self.client.make_bucket("images")
             policy = {
                 "Version": "2012-10-17",
@@ -54,4 +66,4 @@ class MinioConfig:
     async def delete_file(self, file_name: str):
         self.client.remove_object("images", file_name)
 
-minio = MinioConfig(url="localhost:9000", access_key="minioadmin", secret_key="minioadmin")
+minio = MinioSettings()
