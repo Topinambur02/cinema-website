@@ -8,6 +8,8 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 from model.Base import Base
 from model.Movie import Movie
 from model.Image import Image
+from model.Genre import Genre
+from model.Session import Session
 
 from Config import settings
 

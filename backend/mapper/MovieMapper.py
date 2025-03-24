@@ -7,6 +7,7 @@ class MovieMapper:
         data = {
             'id': orm_model.id,
             'name': orm_model.name,
+            'description': orm_model.description,
             'imageID': orm_model.imageID,
             'ageLimit': orm_model.ageLimit,
         }

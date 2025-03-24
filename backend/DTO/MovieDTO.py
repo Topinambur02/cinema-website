@@ -5,18 +5,21 @@ class MovieDTO(BaseModel):
     id: int
     name: str
     imageID: int
+    description: str
     ageLimit: str
     genres_ids: list[int]
 
 class CreateMovieDTO(BaseModel):
     name: str
     imageID: int
+    description: str
     ageLimit: str
     genres_ids: list[int]
 
 class UpdateMovieDTO(BaseModel):
     name: str
     imageID: int
+    description: str
     ageLimit: str
     genres_ids: list[int]
 
