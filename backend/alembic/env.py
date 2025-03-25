@@ -10,6 +10,8 @@ from model.Movie import Movie
 from model.Image import Image
 from model.Genre import Genre
 from model.Session import Session
+from model.Hall import Hall
+from model.Seat import Seat
 
 from Config import settings
 
