@@ -7,16 +7,19 @@ class SessionDTO(BaseModel):
     startTime: datetime
     endTime: datetime
     movieId: int
+    hallId: int
 
 class CreateSessionDTO(BaseModel):
     startTime: datetime
     endTime: datetime
     movieId: int
+    hallId: int
 
 class UpdateSessionDTO(BaseModel):
     startTime: datetime
     endTime: datetime
     movieId: int
+    hallId: int
 
 DTOType = TypeVar("DTOType", bound=SessionDTO)
 CreateDTOType = TypeVar("CreateDTOType", bound=CreateSessionDTO)
