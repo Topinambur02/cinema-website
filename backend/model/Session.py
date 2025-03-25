@@ -1,4 +1,5 @@
 from datetime import datetime
+from model.Hall import Hall
 from model.Movie import Movie
 from sqlalchemy import ForeignKey
 from model.Base import Base
@@ -13,4 +14,11 @@ class Session(Base):
     movie: Mapped[Movie] = relationship(
         'Movie',
         foreign_keys=[movieId]
+    )
+    hallId: Mapped[int] = mapped_column(
+        ForeignKey(column="hall.id", ondelete="NO ACTION")
+    )
+    hall: Mapped[Hall] = relationship(
+        'Hall',
+        foreign_keys=[hallId]   
     )
