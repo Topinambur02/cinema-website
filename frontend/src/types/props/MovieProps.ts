@@ -1,5 +1,5 @@
-import { MovieType } from '../MovieType'
+import { MovieTypeWithImageAndGenres } from '../MovieTypeWithImageAndGenres'
 
 export interface MovieProps {
-  movie: MovieType
+  movie: MovieTypeWithImageAndGenres
 }

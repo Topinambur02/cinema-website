@@ -1,7 +1,8 @@
 export type MovieType = {
   id: number
   name: string
-  imageUrl: string
-  genres: Array<string>
-  ageLimit: number
+  imageID: number
+  description: string
+  ageLimit: string
+  genres_ids: Array<number>
 }
