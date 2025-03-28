@@ -3,16 +3,30 @@ import './App.css'
 import AppRouter from './components/AppRouter'
 import Header from './components/header/Header'
 import Footer from './components/footer/Footer'
-import { JSX } from 'react'
+import { createContext, JSX, useState } from 'react'
+import { MovieStore } from './store/MovieStore'
+import { StoresType } from './types/StoresType'
+import { ImageStore } from './store/ImageStore'
+import { GenreStore } from './store/GenreStore'
+
+export const Context = createContext<StoresType | null>(null)
 
 function App(): JSX.Element {
+  const [currentMovieStore] = useState<StoresType>({
+    movieStore: new MovieStore(),
+    imageStore: new ImageStore(),
+    genreStore: new GenreStore(),
+  });
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header />
-        <AppRouter />
-        <Footer />
-      </BrowserRouter>
+      <Context.Provider value={currentMovieStore}>
+        <BrowserRouter>
+          <Header />
+          <AppRouter />
+          <Footer />
+        </BrowserRouter>
+      </Context.Provider>
     </div>
   )
 }
