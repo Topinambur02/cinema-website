@@ -1,4 +1,4 @@
-from typing import TypeVar
+from typing import TypeVar, Optional
 from pydantic import BaseModel
 
 class SeatDTO(BaseModel):
@@ -7,6 +7,7 @@ class SeatDTO(BaseModel):
     sessionId: int
     isBooked: bool
     price: int
+    userId: Optional[int] = None
 
 class CreateSeatDTO(BaseModel):
     seatNumber: int
@@ -15,7 +16,9 @@ class CreateSeatDTO(BaseModel):
 
 class UpdateSeatDTO(BaseModel):
     seatNumber: int
+    isBooked: bool
     sessionId: int
+    userId: int
     price: int
 
 DTOType = TypeVar("DTOType", bound=SeatDTO)

@@ -15,7 +15,7 @@ class SeatService:
 
         if not(seat):
             raise SeatNotFoundException()
-
+        
         return mapper.to_dto(dto_model=SeatDTO, orm_model=seat)
     
     async def create(self, dto: CreateSeatDTO) -> SeatDTO:
