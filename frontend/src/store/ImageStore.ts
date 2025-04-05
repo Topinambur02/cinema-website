@@ -1,21 +1,20 @@
-import { makeAutoObservable } from "mobx";
-import { ImageType } from "../types/ImageType";
+import { makeAutoObservable } from 'mobx'
+import { ImageType } from '../types/ImageType'
 
 export class ImageStore {
-    
-    private images: Array<ImageType>
+  private images: Array<ImageType>
 
-    constructor() {
-        this.images = []
+  constructor() {
+    this.images = []
 
-        makeAutoObservable(this)
-    }
+    makeAutoObservable(this)
+  }
 
-    public setImages(images: Array<ImageType>): void {
-        this.images = images
-    }
+  public setImages(images: Array<ImageType>): void {
+    this.images = images
+  }
 
-    public getImages(): Array<ImageType> {
-        return this.images
-    }
+  public getImages(): Array<ImageType> {
+    return this.images
+  }
 }

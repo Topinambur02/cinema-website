@@ -8,19 +8,23 @@ import { MovieStore } from './store/MovieStore'
 import { StoresType } from './types/StoresType'
 import { ImageStore } from './store/ImageStore'
 import { GenreStore } from './store/GenreStore'
+import { SessionStore } from './store/SessionStore'
+import { HallStore } from './store/HallStore'
 
 export const Context = createContext<StoresType | null>(null)
 
 function App(): JSX.Element {
-  const [currentMovieStore] = useState<StoresType>({
+  const [currentStore] = useState<StoresType>({
     movieStore: new MovieStore(),
     imageStore: new ImageStore(),
     genreStore: new GenreStore(),
-  });
+    sessionStore: new SessionStore(),
+    hallStore: new HallStore(),
+  })
 
   return (
     <div className="App">
-      <Context.Provider value={currentMovieStore}>
+      <Context.Provider value={currentStore}>
         <BrowserRouter>
           <Header />
           <AppRouter />

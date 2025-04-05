@@ -3,7 +3,7 @@ import Movie from '../../components/Movie/Movie'
 import { MovieType } from '../../types/MovieType'
 import styles from './MainPage.module.scss'
 import Layout from '../Layout'
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react-lite'
 import { Context } from '../../App'
 import { StoresType } from '../../types/StoresType'
 import MoviesApi from '../../http/MoviesApi'
@@ -26,10 +26,10 @@ const MainPage = observer((): JSX.Element => {
   const genres = genreStore.getGenres()
 
   const moviesWithImagesAndGenres = movies.map((movie: MovieType) => {
-    const image = images.find(image => image.id === movie.imageID)
+    const image = images.find((image) => image.id === movie.imageID)
     const listOfGenres = movie.genres_ids
-      .map(genreId => genres.find(genre => genre.id === genreId))
-      .filter((genre): genre is GenreType => genre !== undefined);
+      .map((genreId) => genres.find((genre) => genre.id === genreId))
+      .filter((genre): genre is GenreType => genre !== undefined)
     return { ...movie, image, listOfGenres }
   })
 

@@ -1,0 +1,199 @@
+.pageControl {
+  height: auto;
+  padding: 16px 0;
+  margin: 0;
+
+  a {
+    color: #8b919b;
+    font-weight: 600;
+    line-height: 20px;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    height: 24px;
+    transition: all 300ms ease;
+  }
+}
+
+.filmBoard {
+  margin: 0;
+  position: relative;
+
+  .image {
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      background: #1c1f23;
+      border-radius: 16px 0px 0px 16px;
+      opacity: 1;
+      width: 174px;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      transform: rotate(0deg);
+    }
+
+    img {
+      border-radius: 16px;
+      height: 360px;
+      width: 100%;
+      min-height: 192px;
+      object-fit: cover;
+      object-position: 50% 0;
+    }
+
+    .gradient::before {
+      content: '';
+      display: block;
+      position: absolute;
+      background: linear-gradient(90deg, #1c1f23 0%, rgba(28, 31, 35, 0) 100%);
+      left: 174px;
+      top: 0;
+      width: 300px;
+      height: 100%;
+    }
+  }
+
+  .content {
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: transparent;
+    z-index: 10;
+    padding: 32px 0 32px 32px;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    height: 360px;
+
+    .name {
+      margin-top: 24px;
+      text-transform: uppercase;
+      font-size: 31px;
+      font-weight: 500;
+      line-height: 48px;
+      letter-spacing: -2px;
+    }
+
+    p {
+      margin: 16px 0 8px;
+      line-height: 20px;
+    }
+
+    .stickerWhite {
+      margin: 16px 8px 0 0;
+      height: 28px;
+      width: 30px;
+      line-height: 28px;
+      font-size: 14px;
+      color: #2e3239;
+      background: #fff;
+      display: inline-block;
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 0 8px;
+    }
+  }
+
+  .description {
+    padding: 10px 0;
+    max-width: 800px;
+    margin: 0 10px;
+    margin-top: 10px;
+
+    .descriptionTitle {
+      font-size: 24px;
+      font-weight: 600;
+      color: #fff;
+      margin: 0;
+    }
+
+    .descriptionText {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #fff;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+  }
+}
+
+.sessionBox {
+  margin-top: 14px;
+  width: 20%;
+
+  .sessionItem {
+    width: 328px;
+    margin: 0 5px;
+
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .infoLine {
+        border-radius: 6px;
+        overflow: hidden;
+        display: flex;
+        background: #e3000b;
+        font-weight: bold;
+        margin-left: 5px;
+
+        .period {
+          background: #fff;
+          display: flex;
+          align-items: center;
+          padding: 0 4px;
+          color: #2e3239;
+        }
+
+        .format {
+          padding: 0 4px;
+        }
+      }
+    }
+
+    .title {
+      margin: 8px;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .hallWrapper {
+      margin: auto -12px 0;
+      margin-left: 0;
+      margin-right: 5px;
+      position: relative;
+      background: #2e3239;
+      border-radius: 16px;
+      padding: 12px;
+
+      .name {
+        padding-bottom: 4px;
+        color: #8b919b;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16px;
+        margin-bottom: 10px;
+      }
+
+      .place {
+        display: inline-flex;
+        align-items: center;
+        height: 16px;
+        margin: 4px 0 0;
+        width: 33.3333%;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+  }
+}

@@ -1,22 +1,20 @@
-import { makeAutoObservable } from "mobx";
-import { GenreType } from "../types/GenreType";
+import { makeAutoObservable } from 'mobx'
+import { GenreType } from '../types/GenreType'
 
 export class GenreStore {
+  private genres: Array<GenreType>
 
-    private genres: Array<GenreType>
+  constructor() {
+    this.genres = []
 
-    constructor() {
-        this.genres = []
+    makeAutoObservable(this)
+  }
 
-        makeAutoObservable(this)
-    }
+  public setGenres(genres: Array<GenreType>): void {
+    this.genres = genres
+  }
 
-    public setGenres(genres: Array<GenreType>): void {
-        this.genres = genres
-    }
-
-    public getGenres(): Array<GenreType> {
-        return this.genres
-    }
-
+  public getGenres(): Array<GenreType> {
+    return this.genres
+  }
 }
