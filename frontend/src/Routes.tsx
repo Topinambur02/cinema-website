@@ -5,6 +5,7 @@ import {
   MAIN_ROUTE,
   MOVIE_ROUTE,
   NOT_FOUND_ROUTE,
+  TICKETS_ROUTE,
 } from './constants/constants'
 import MainPage from './pages/MainPage/MainPage'
 import ContactPage from './pages/ContactPage/ContactPage'
@@ -12,6 +13,7 @@ import AboutPage from './pages/AboutPage/AboutPage'
 import CinemaPage from './pages/CinemaPage/CinemaPage'
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
 import MoviePage from './pages/MoviePage/MoviePage'
+import TicketsPage from './pages/TicketsPage/TicketsPage'
 
 export const publicRoutes = [
   {
@@ -37,5 +39,9 @@ export const publicRoutes = [
   {
     path: MOVIE_ROUTE,
     component: <MoviePage />,
+  },
+  {
+    path: TICKETS_ROUTE,
+    component: <TicketsPage />,
   },
 ]

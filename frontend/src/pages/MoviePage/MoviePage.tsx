@@ -73,7 +73,7 @@ const MoviePage = () => {
       </div>
       <div className={styles.sessionBox}>
         {sessionsWithHall.map((session) => (
-          <Link to={'/'} key={session.id} className={styles.sessionItem}>
+          <Link to={'/sessions/' + session.id + '/tickets'} key={session.id} className={styles.sessionItem}>
             <div className={styles.head}>
               <div className={styles.infoLine}>
                 <div className={styles.period}>
