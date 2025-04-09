@@ -1,5 +1,5 @@
 .movieItem {
-  width: calc(16.6667% - 16px);
+  width: 160px;
   margin: 16px 8px 0;
   padding-bottom: 20px;
 
@@ -7,11 +7,14 @@
     position: relative;
     display: flex;
     border-radius: 10px;
+    aspect-ratio: 2/3;
+    overflow: hidden;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
     }
 
     .panel {

@@ -1,8 +1,8 @@
-"""Add user table
+"""add user table
 
-Revision ID: e767c5aa26fb
+Revision ID: c7bb2d8493fa
 Revises: 61e8f297844c
-Create Date: 2025-03-31 17:29:20.262112
+Create Date: 2025-04-08 19:57:59.911757
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision: str = 'e767c5aa26fb'
+revision: str = 'c7bb2d8493fa'
 down_revision: Union[str, None] = '61e8f297844c'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -31,7 +31,7 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
-    op.add_column('seat', sa.Column('userId', sa.Integer(), nullable=False))
+    op.add_column('seat', sa.Column('userId', sa.Integer(), nullable=True))
     op.create_foreign_key(None, 'seat', 'user', ['userId'], ['id'], ondelete='NO ACTION')
     # ### end Alembic commands ###
 

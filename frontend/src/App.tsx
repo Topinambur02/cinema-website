@@ -10,6 +10,7 @@ import { ImageStore } from './store/ImageStore'
 import { GenreStore } from './store/GenreStore'
 import { SessionStore } from './store/SessionStore'
 import { HallStore } from './store/HallStore'
+import { SeatStore } from './store/SeatStore'
 
 export const Context = createContext<StoresType | null>(null)
 
@@ -20,6 +21,7 @@ function App(): JSX.Element {
     genreStore: new GenreStore(),
     sessionStore: new SessionStore(),
     hallStore: new HallStore(),
+    seatStore: new SeatStore(),
   })
 
   return (
