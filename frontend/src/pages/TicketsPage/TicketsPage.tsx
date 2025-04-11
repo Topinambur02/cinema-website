@@ -1,26 +1,38 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../Layout";
 import styles from "./TicketsPage.module.scss";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import SeatApi from "../../http/SeatApi";
 import { Context } from "../../App";
 import { StoresType } from "../../types/StoresType";
 import { observer } from "mobx-react-lite";
 import { ChevronLeft } from "lucide-react";
+import LoginFormModal from "../../components/LoginFormModal/LoginFormModal";
+import { SeatType } from "../../types/SeatType";
 
 const TicketsPage = observer(() => {
     const { id } = useParams<{ id: string }>()
-    const { seatStore } = useContext(Context) as StoresType
+    const { seatStore, userStore } = useContext(Context) as StoresType
+    const [showLoginModal, setShowLoginModal] = useState(false)
+    const selectedSeats = seatStore.getSelectedSeats()
 
     useEffect(() => {
         SeatApi.getAll().then((data) => seatStore.setSeats(data))
     }, [])
 
+    const handleSeatClick = (seat: SeatType) => {
+        if (!userStore.isAuth) {
+            setShowLoginModal(true)
+        } else {
+            seatStore.toggleSeatSelection(seat.id)
+        }
+    }
+
     const seats = seatStore.getSeats()
     const seatsBySession = seats.filter((seat) => seat.sessionId === Number(id))
     const seatsPerRow = 8
     const rows = []
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     for (let i = 0; i < seatsBySession.length; i += seatsPerRow) {
         rows.push(seatsBySession.slice(i, i + seatsPerRow))
@@ -28,6 +40,8 @@ const TicketsPage = observer(() => {
 
     return (
         <Layout>
+            {showLoginModal && <LoginFormModal onClose={() => setShowLoginModal(false)} />}
+
             <div className={styles.pageContent}>
                 <ChevronLeft className={styles.backIcon} />
                 <button className={styles.back} onClick={() => navigate(-1)}>Назад</button>
@@ -59,7 +73,13 @@ const TicketsPage = observer(() => {
                                 {row.map(seat => (
                                     <div
                                         key={seat.id}
-                                        className={`${styles.seat} ${!seat.isBooked ? styles.free : styles.sold}`}
+                                        className={`${styles.seat} ${selectedSeats.includes(seat.id)
+                                            ? styles.selected
+                                            : !seat.isBooked
+                                                ? styles.free
+                                                : styles.sold
+                                            }`}
+                                        onClick={() => handleSeatClick(seat)}
                                     >
                                         {seat.seatNumber}
                                     </div>

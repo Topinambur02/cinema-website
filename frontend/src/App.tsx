@@ -11,6 +11,7 @@ import { GenreStore } from './store/GenreStore'
 import { SessionStore } from './store/SessionStore'
 import { HallStore } from './store/HallStore'
 import { SeatStore } from './store/SeatStore'
+import { UserStore } from './store/UserStore'
 
 export const Context = createContext<StoresType | null>(null)
 
@@ -22,6 +23,7 @@ function App(): JSX.Element {
     sessionStore: new SessionStore(),
     hallStore: new HallStore(),
     seatStore: new SeatStore(),
+    userStore: new UserStore(),
   })
 
   return (
