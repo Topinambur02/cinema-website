@@ -4,6 +4,7 @@ import { ImageStore } from '../store/ImageStore'
 import { MovieStore } from '../store/MovieStore'
 import { SeatStore } from '../store/SeatStore'
 import { SessionStore } from '../store/SessionStore'
+import { UserStore } from '../store/UserStore'
 
 export interface StoresType {
   movieStore: MovieStore
@@ -12,4 +13,5 @@ export interface StoresType {
   sessionStore: SessionStore
   hallStore: HallStore
   seatStore: SeatStore
+  userStore: UserStore
 }
