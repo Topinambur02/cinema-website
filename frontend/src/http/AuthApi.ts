@@ -1,32 +1,29 @@
-import { AxiosResponse } from "axios";
-import $host from ".";
-import { AuthResponse } from "../types/response/AuthResponse";
-import { UserType } from "../types/UserType";
-import { RegResponse } from "../types/response/RegResponse";
+import { AxiosResponse } from 'axios'
+import $host from '.'
+import { AuthResponse } from '../types/response/AuthResponse'
+import { UserType } from '../types/UserType'
+import { RegResponse } from '../types/response/RegResponse'
+
+const FORM_URLENCODED_HEADERS = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+}
 
 export class AuthApi {
-    static async login(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-        const params = new URLSearchParams()
+  static async login(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
+    const params = new URLSearchParams({ username: email, password })
 
-        params.append('username', email)
-        params.append('password', password)
+    return $host.post<AuthResponse>('auth/login', params, { headers: FORM_URLENCODED_HEADERS })
+  }
 
-        return await $host.post<AuthResponse>('auth/login', params, {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            }
-          })
-    }
+  static async register(email: string, password: string, role: string): Promise<AxiosResponse<RegResponse>> {
+    return $host.post<RegResponse>('auth/register', { email, password, role })
+  }
 
-    static async registration(email: string, password: string, role: string): Promise<AxiosResponse<RegResponse>> {
-        return await $host.post<RegResponse>('auth/register', { email, password, role })
-    }
+  static async logout(): Promise<AxiosResponse<void>> {
+    return $host.post<void>('auth/logout')
+  }
 
-    static async logout(): Promise<void> {
-        await $host.post('auth/logout')
-    }
-
-    static async me(): Promise<AxiosResponse<UserType>> {
-        return await $host.get('user/me')
-    }
+  static async getCurrentUser(): Promise<AxiosResponse<UserType>> {
+    return $host.get<UserType>('user/me')
+  }
 }

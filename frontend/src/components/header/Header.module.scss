@@ -1,3 +1,5 @@
+@use '../../scss/variables';
+
 .header {
   margin-top: 20px;
 
@@ -24,13 +26,13 @@
           display: inline-flex;
           align-items: center;
           text-decoration: none;
-          color: #1db1ba;
+          color: variables.$blue;
           font-weight: 600;
           height: 56px;
 
           .icon {
             margin-right: 8px;
-            color: white;
+            color: variables.$white;
           }
         }
       }
@@ -41,7 +43,7 @@
       }
 
       .user {
-        background-color: #1c1f23;
+        background-color: variables.$black;
         border-radius: 12px;
         height: 40px;
         padding: 0 8px;

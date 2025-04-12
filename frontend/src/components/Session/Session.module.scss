@@ -1,0 +1,72 @@
+@use '../../scss/variables';
+
+.sessionItem {
+  width: 328px;
+  margin: 0 5px;
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .infoLine {
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      background: variables.$red;
+      font-weight: bold;
+      margin-left: 5px;
+
+      .period {
+        background: variables.$white;
+        display: flex;
+        align-items: center;
+        padding: 0 4px;
+        color: variables.$light-grey;
+      }
+
+      .format {
+        padding: 0 4px;
+      }
+    }
+  }
+
+  .title {
+    margin: 8px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .hallWrapper {
+    margin: auto -12px 0;
+    margin-left: 0;
+    margin-right: 5px;
+    position: relative;
+    background: #2e3239;
+    border-radius: 16px;
+    padding: 12px;
+
+    .name {
+      padding-bottom: 4px;
+      color: #8b919b;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+      margin-bottom: 10px;
+    }
+
+    .place {
+      display: inline-flex;
+      align-items: center;
+      height: 16px;
+      margin: 4px 0 0;
+      width: 33.3333%;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+}

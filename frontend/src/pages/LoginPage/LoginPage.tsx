@@ -1,7 +1,8 @@
-import LoginForm from "../../components/loginForm/LoginForm"
-import Layout from "../Layout"
+import { JSX } from 'react'
+import LoginForm from '../../components/LoginForm/LoginForm'
+import Layout from '../Layout'
 
-const LoginPage = () => {
+const LoginPage = (): JSX.Element => {
   return (
     <Layout>
       <h1>Авторизация</h1>

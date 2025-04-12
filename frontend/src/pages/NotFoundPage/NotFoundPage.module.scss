@@ -1,3 +1,5 @@
+@use '../../scss/variables';
+
 .formBox {
   padding-top: 24px;
   margin: 0 auto;
@@ -13,7 +15,7 @@
     font-size: 18px;
     line-height: 32px;
     margin-top: 16px;
-    color: #8b919b;
+    color: variables.$grey;
     font-weight: 500;
   }
 }

@@ -1,0 +1,13 @@
+@use './variables';
+
+.free {
+  background-color: variables.$color-free;
+}
+
+.selected {
+  background-color: variables.$color-selected;
+}
+
+.sold {
+  background-color: variables.$color-sold;
+}

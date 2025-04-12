@@ -2,28 +2,28 @@ import $host from '.'
 import { GenreType } from '../types/GenreType'
 
 class GenresApi {
-  static async getAll() {
-    const { data } = await $host.get('/genre')
+  static async getAll(): Promise<GenreType[]> {
+    const { data } = await $host.get<GenreType[]>('/genre')
     return data
   }
 
-  static async getById(id: number) {
-    const { data } = await $host.get(`/genre/${id}`)
+  static async getById(id: number): Promise<GenreType> {
+    const { data } = await $host.get<GenreType>(`/genre/${id}`)
     return data
   }
 
-  static async create(genre: GenreType) {
-    const { data } = await $host.post('/genre', genre)
+  static async create(genre: GenreType): Promise<GenreType> {
+    const { data } = await $host.post<GenreType>('/genre', genre)
     return data
   }
 
-  static async update(id: number, genre: GenreType) {
-    const { data } = await $host.put(`/genre/${id}`, genre)
+  static async update(id: number, genre: GenreType): Promise<GenreType> {
+    const { data } = await $host.put<GenreType>(`/genre/${id}`, genre)
     return data
   }
 
-  static async delete(id: number) {
-    const { data } = await $host.delete(`/genre/${id}`)
+  static async delete(id: number): Promise<GenreType> {
+    const { data } = await $host.delete<GenreType>(`/genre/${id}`)
     return data
   }
 }

@@ -1,0 +1,21 @@
+@use '../../scss/states';
+@use '../../scss/variables';
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  .rowLabel {
+    width: 40px;
+    text-align: right;
+    font-size: 14px;
+    color: variables.$white;
+  }
+
+  .seats {
+    display: flex;
+    gap: 5px;
+  }
+}

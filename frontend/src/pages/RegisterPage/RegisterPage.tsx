@@ -1,5 +1,5 @@
-import RegisterForm from "../../components/registerForm/RegisterForm"
-import Layout from "../Layout"
+import RegisterForm from '../../components/RegisterForm/RegisterForm'
+import Layout from '../Layout'
 
 const RegisterPage = () => {
   return (

@@ -1,0 +1,103 @@
+@use '../../scss/variables';
+
+.image {
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    background: variables.$black;
+    border-radius: 16px 0px 0px 16px;
+    opacity: 1;
+    width: 174px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: rotate(0deg);
+  }
+
+  img {
+    border-radius: 16px;
+    height: 360px;
+    width: 100%;
+    min-height: 192px;
+    object-fit: cover;
+    object-position: 50% 0;
+  }
+
+  .gradient::before {
+    content: '';
+    display: block;
+    position: absolute;
+    background: linear-gradient(90deg, #1c1f23 0%, rgba(28, 31, 35, 0) 100%);
+    left: 174px;
+    top: 0;
+    width: 300px;
+    height: 100%;
+  }
+}
+
+.content {
+  margin: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: transparent;
+  z-index: 10;
+  padding: 32px 0 32px 32px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  height: 360px;
+
+  .name {
+    margin-top: 24px;
+    text-transform: uppercase;
+    font-size: 31px;
+    font-weight: 500;
+    line-height: 48px;
+    letter-spacing: -2px;
+  }
+
+  p {
+    margin: 16px 0 8px;
+    line-height: 20px;
+  }
+
+  .stickerWhite {
+    margin: 16px 8px 0 0;
+    height: 28px;
+    width: 30px;
+    line-height: 28px;
+    font-size: 14px;
+    color: variables.$light-grey;
+    background: variables.$white;
+    display: inline-block;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0 8px;
+  }
+}
+
+.description {
+  padding: 10px 0;
+  max-width: 800px;
+  margin: 0 10px;
+  margin-top: 10px;
+
+  .descriptionTitle {
+    font-size: 24px;
+    font-weight: 600;
+    color: variables.$white;
+    margin: 0;
+  }
+
+  .descriptionText {
+    font-size: 16px;
+    line-height: 1.6;
+    color: variables.$white;
+    margin: 0;
+    white-space: pre-wrap;
+  }
+}

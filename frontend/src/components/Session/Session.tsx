@@ -1,0 +1,31 @@
+import { Armchair } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import styles from './Session.module.scss'
+import formatTime from '../../utils/FormatTime'
+import { SessionProps } from '../../types/props/SessionProps'
+
+const Session = ({ sessionWithHall, movie }: SessionProps) => {
+  return (
+    <Link to={'/sessions/' + sessionWithHall.id + '/tickets'} key={sessionWithHall.id} className={styles.sessionItem}>
+      <div className={styles.head}>
+        <div className={styles.infoLine}>
+          <div className={styles.period}>
+            {formatTime(sessionWithHall.startTime)} - {formatTime(sessionWithHall.endTime)}
+          </div>
+          <div className={styles.format}>2D</div>
+        </div>
+        <div className={styles.age}>{movie.ageLimit}</div>
+      </div>
+      <div className={styles.title}>{movie.name}</div>
+      <div className={styles.hallWrapper}>
+        <div className={styles.name}>{sessionWithHall.hall?.name}</div>
+        <div className={styles.place}>
+          {' '}
+          <Armchair /> 550₽
+        </div>
+      </div>
+    </Link>
+  )
+}
+
+export default Session

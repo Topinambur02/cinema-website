@@ -52,14 +52,14 @@ export const publicRoutes = [
   },
   {
     path: LOGIN_ROUTE,
-    component: <LoginPage />
+    component: <LoginPage />,
   },
   {
     path: REGISTER_ROUTE,
-    component: <RegisterPage />
+    component: <RegisterPage />,
   },
   {
     path: ACCOUNT_ROUTE,
-    component: <AccountPage />
-  }
+    component: <AccountPage />,
+  },
 ]
