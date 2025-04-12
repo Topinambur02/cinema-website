@@ -1,7 +1,8 @@
+import { JSX } from 'react'
 import Layout from '../Layout'
 import styles from './AboutPage.module.scss'
 
-const AboutPage = () => {
+const AboutPage = (): JSX.Element => {
   return (
     <Layout>
       <h1>О компании</h1>

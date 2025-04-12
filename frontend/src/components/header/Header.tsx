@@ -8,7 +8,7 @@ import { StoresType } from '../../types/StoresType'
 
 const Header = (): JSX.Element => {
   const { userStore } = useContext(Context) as StoresType
-  const isAuth = userStore.isAuth  
+  const isAuth = userStore.isAuth
 
   return (
     <header className={styles.header}>
@@ -26,31 +26,27 @@ const Header = (): JSX.Element => {
             </Link>
           </div>
 
-          {
-            isAuth
-              ?
+          {isAuth ? (
+            <div className={styles.user}>
+              <Link to={'/account'}>
+                <div>Личный кабинет</div>
+              </Link>
+
+              <Link to={'/account'} className={styles.userIcon}>
+                <CircleUser className={styles.circleUser} />
+              </Link>
+            </div>
+          ) : (
+            <div className={styles.auth}>
               <div className={styles.user}>
-                <Link to={'/account'}>
-                  <div>Личный кабинет</div>
-                </Link>
-
-                <Link to={'/account'} className={styles.userIcon}>
-                  <CircleUser className={styles.circleUser} />
-                </Link>
+                <Link to={'/login'}>Вход</Link>
               </div>
-              :
-              <div className={styles.auth}>
-                <div className={styles.user}>
-                  <Link to={'/login'}>Вход</Link>
-                </div>
 
-                <div className={styles.user}>
-                  <Link to={'/register'}>Регистрация</Link>
-                </div>
-
+              <div className={styles.user}>
+                <Link to={'/register'}>Регистрация</Link>
               </div>
-          }
-
+            </div>
+          )}
         </div>
       </div>
     </header>

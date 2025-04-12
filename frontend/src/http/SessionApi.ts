@@ -2,28 +2,28 @@ import $host from '.'
 import { SessionType } from '../types/SessionType'
 
 class SessionApi {
-  static async getAll() {
-    const { data } = await $host.get('/session')
+  static async getAll(): Promise<SessionType[]> {
+    const { data } = await $host.get<SessionType[]>('/session')
     return data
   }
 
-  static async getById(id: number) {
-    const { data } = await $host.get(`/session/${id}`)
+  static async getById(id: number): Promise<SessionType> {
+    const { data } = await $host.get<SessionType>(`/session/${id}`)
     return data
   }
 
-  static async create(session: SessionType) {
-    const { data } = await $host.post('/session', session)
+  static async create(session: SessionType): Promise<SessionType> {
+    const { data } = await $host.post<SessionType>('/session', session)
     return data
   }
 
-  static async update(id: number, session: SessionType) {
-    const { data } = await $host.put(`/session/${id}`, session)
+  static async update(id: number, session: SessionType): Promise<SessionType> {
+    const { data } = await $host.put<SessionType>(`/session/${id}`, session)
     return data
   }
 
-  static async delete(id: number) {
-    const { data } = await $host.delete(`/session/${id}`)
+  static async delete(id: number): Promise<SessionType> {
+    const { data } = await $host.delete<SessionType>(`/session/${id}`)
     return data
   }
 }

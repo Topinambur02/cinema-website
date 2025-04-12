@@ -1,6 +1,6 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-class Settings(BaseSettings):
+class DbSettings(BaseSettings):
     DB_HOST: str
     DB_PORT: int
     DB_NAME: str
@@ -13,4 +13,4 @@ class Settings(BaseSettings):
     
     model_config = SettingsConfigDict(env_file=".env_db")
     
-settings = Settings()
+dbSettings = DbSettings()

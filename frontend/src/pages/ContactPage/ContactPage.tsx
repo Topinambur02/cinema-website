@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import styles from './ContactPage.module.scss'
 import Layout from '../Layout'
+import { JSX } from 'react'
 
-const ContactPage = () => {
+const ContactPage = (): JSX.Element => {
   return (
     <Layout>
       <h1>Контакты</h1>

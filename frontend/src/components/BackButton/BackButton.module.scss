@@ -1,0 +1,24 @@
+@use '../../scss/variables';
+
+.pageContent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  top: 20px;
+
+  .backIcon {
+    color: variables.$grey;
+    width: 25px;
+  }
+
+  .back {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: variables.$grey;
+    padding: 0;
+    font-weight: 600;
+    font-size: 17px;
+    height: 24px;
+  }
+}

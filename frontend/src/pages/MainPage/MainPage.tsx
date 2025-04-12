@@ -12,7 +12,7 @@ import { MovieTypeWithImageAndGenres } from '../../types/MovieTypeWithImageAndGe
 import GenresApi from '../../http/GenresApi'
 import { GenreType } from '../../types/GenreType'
 
-const MainPage = observer((): JSX.Element => {
+const MainPage = (): JSX.Element => {
   const { movieStore, imageStore, genreStore } = useContext(Context) as StoresType
 
   useEffect(() => {
@@ -45,6 +45,6 @@ const MainPage = observer((): JSX.Element => {
       </div>
     </Layout>
   )
-})
+}
 
-export default MainPage
+export default observer(MainPage)
