@@ -1,8 +1,9 @@
 import { ChevronLeft } from 'lucide-react'
 import styles from './BackButton.module.scss'
 import { useNavigate } from 'react-router-dom'
+import { JSX } from 'react'
 
-const BackButton = () => {
+const BackButton = (): JSX.Element => {
   const navigate = useNavigate()
   const handleClick = () => navigate(-1)
 

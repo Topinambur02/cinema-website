@@ -1,7 +1,8 @@
+import { JSX } from 'react'
 import Layout from '../Layout'
 import styles from './NotFoundPage.module.scss'
 
-const NotFoundPage = () => {
+const NotFoundPage = (): JSX.Element => {
   return (
     <Layout>
       <div className={styles.formBox}>

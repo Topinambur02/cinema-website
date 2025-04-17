@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { SessionType } from '../types/SessionType'
 
 export class SessionStore {
-  private sessions: Array<SessionType>
+  private sessions: SessionType[]
 
   constructor() {
     this.sessions = []
@@ -10,11 +10,11 @@ export class SessionStore {
     makeAutoObservable(this)
   }
 
-  public setSessions(sessions: Array<SessionType>): void {
+  public setSessions(sessions: SessionType[]): void {
     this.sessions = sessions
   }
 
-  public getSessions(): Array<SessionType> {
+  public getSessions(): SessionType[] {
     return this.sessions
   }
 }

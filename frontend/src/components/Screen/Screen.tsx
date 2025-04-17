@@ -1,6 +1,7 @@
+import { JSX } from 'react'
 import styles from './Screen.module.scss'
 
-const Screen = () => {
+const Screen = (): JSX.Element => {
   return (
     <div className={styles.screenContainer}>
       <span className={styles.screenText}>Экран</span>

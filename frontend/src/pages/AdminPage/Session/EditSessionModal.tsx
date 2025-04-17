@@ -1,14 +1,31 @@
-import { useContext, useEffect } from "react"
-import { Context } from "../../../App"
-import { StoresType } from "../../../types/StoresType"
-import { Form, Modal, Select } from "antd"
-import SessionApi from "../../../http/SessionApi"
-import { EditSessionModalProps } from "../../../types/props/EditSessionModalProps"
+import { ChangeEvent, JSX, useContext, useEffect } from 'react'
+import { Context } from '../../../App'
+import { StoresType } from '../../../types/StoresType'
+import { Form, Modal, Select } from 'antd'
+import SessionApi from '../../../http/SessionApi'
+import { EditSessionModalProps } from '../../../types/props/EditSessionModalProps'
 
-const EditSessionModal = ({ isEditModalOpen, setIsEditModalOpen, selectedSession, availableMovies, availableHalls }: EditSessionModalProps) => {
+const EditSessionModal = ({
+  isEditModalOpen,
+  setIsEditModalOpen,
+  selectedSession,
+  availableMovies,
+  availableHalls,
+}: EditSessionModalProps): JSX.Element => {
   const [form] = Form.useForm()
   const { sessionStore } = useContext(Context) as StoresType
   const sessions = sessionStore.getSessions()
+  const onCancel = () => setIsEditModalOpen(false)
+  const onChangeStart = (e: ChangeEvent<HTMLInputElement>) => form.setFieldsValue({ startTime: e.target.value })
+  const onChangeEnd = (e: ChangeEvent<HTMLInputElement>) => form.setFieldsValue({ endTime: e.target.value })
+  const optionMovies = availableMovies.map(movie => ({
+    value: movie.id,
+    label: `ID: ${movie.id} (${movie.name})`,
+  }))
+  const optionHalls = availableHalls.map(hall => ({
+    value: hall.id,
+    label: `ID: ${hall.id} (${hall.name})`,
+  }))
 
   useEffect(() => {
     if (isEditModalOpen && selectedSession) {
@@ -21,9 +38,7 @@ const EditSessionModal = ({ isEditModalOpen, setIsEditModalOpen, selectedSession
 
     const values = await form.validateFields()
     const updatedSession = await SessionApi.update(selectedSession.id, values)
-    const updatedSessions = sessions.map(s =>
-      s.id === updatedSession.id ? updatedSession : s
-    )
+    const updatedSessions = sessions.map((s) => (s.id === updatedSession.id ? updatedSession : s))
     sessionStore.setSessions(updatedSessions)
     setIsEditModalOpen(false)
   }
@@ -33,16 +48,23 @@ const EditSessionModal = ({ isEditModalOpen, setIsEditModalOpen, selectedSession
       title="Добавление сеанса"
       open={isEditModalOpen}
       onOk={handleEdit}
-      onCancel={() => setIsEditModalOpen(false)}
+      onCancel={onCancel}
     >
       <Form layout="vertical" form={form}>
-
         <Form.Item label="Время начала" name="startTime">
-          <input type="datetime-local" style={{ width: '100%' }} onChange={e => form.setFieldsValue({ startTime: e.target.value })} />
+          <input
+            type="datetime-local"
+            style={{ width: '100%' }}
+            onChange={onChangeStart}
+          />
         </Form.Item>
 
         <Form.Item label="Время окончания" name="endTime">
-          <input type="datetime-local" style={{ width: '100%' }} onChange={e => form.setFieldsValue({ endTime: e.target.value })} />
+          <input
+            type="datetime-local"
+            style={{ width: '100%' }}
+            onChange={onChangeEnd}
+          />
         </Form.Item>
 
         <Form.Item label="ID фильма" name="movieId">
@@ -51,10 +73,7 @@ const EditSessionModal = ({ isEditModalOpen, setIsEditModalOpen, selectedSession
             showSearch
             placeholder="Выберите фильм"
             optionFilterProp="children"
-            options={availableMovies.map(movie => ({
-              value: movie.id,
-              label: `ID: ${movie.id} (${movie.name || 'Без названия'})`
-            }))}
+            options={optionMovies}
           />
         </Form.Item>
 
@@ -64,15 +83,10 @@ const EditSessionModal = ({ isEditModalOpen, setIsEditModalOpen, selectedSession
             showSearch
             placeholder="Выберите зал"
             optionFilterProp="children"
-            options={availableHalls.map(hall => ({
-              value: hall.id,
-              label: `ID: ${hall.id} (${hall.name || 'Без названия'})`
-            }))}
+            options={optionHalls}
           />
         </Form.Item>
-
       </Form>
-
     </Modal>
   )
 }

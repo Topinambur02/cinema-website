@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { MovieType } from '../types/MovieType'
 
 export class MovieStore {
-  private movies: Array<MovieType>
+  private movies: MovieType[]
 
   constructor() {
     this.movies = []
@@ -10,11 +10,11 @@ export class MovieStore {
     makeAutoObservable(this)
   }
 
-  public setMovies(movies: Array<MovieType>): void {
+  public setMovies(movies: MovieType[]): void {
     this.movies = movies
   }
 
-  public getMovies(): Array<MovieType> {
+  public getMovies(): MovieType[] {
     return this.movies
   }
 }

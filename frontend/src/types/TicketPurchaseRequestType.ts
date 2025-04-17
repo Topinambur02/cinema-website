@@ -1,3 +1,3 @@
 export type TicketPurchaseRequestType = {
-    seatIds: number[]
+  seatIds: number[]
 }

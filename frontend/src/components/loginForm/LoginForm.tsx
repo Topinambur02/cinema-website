@@ -1,9 +1,9 @@
-import { ChangeEvent, FormEvent, useContext, useState } from 'react'
+import { ChangeEvent, FormEvent, JSX, useContext, useState } from 'react'
 import styles from './LoginForm.module.scss'
 import { Context } from '../../App'
 import { StoresType } from '../../types/StoresType'
 
-const LoginForm = () => {
+const LoginForm = (): JSX.Element => {
   const { userStore } = useContext(Context) as StoresType
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')

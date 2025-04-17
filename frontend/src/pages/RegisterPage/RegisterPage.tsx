@@ -1,7 +1,8 @@
+import { JSX } from 'react'
 import RegisterForm from '../../components/RegisterForm/RegisterForm'
 import Layout from '../Layout'
 
-const RegisterPage = () => {
+const RegisterPage = (): JSX.Element => {
   return (
     <Layout>
       <h1>Регистрация</h1>

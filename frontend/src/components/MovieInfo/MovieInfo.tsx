@@ -1,7 +1,14 @@
+import { JSX } from 'react'
 import { MovieInfoProps } from '../../types/props/MovieInfoProps'
 import styles from './MovieInfo.module.scss'
 
-const MovieInfo = ({ imageUrl, name, ageLimit, genres, description }: MovieInfoProps) => {
+const MovieInfo = ({ 
+  imageUrl, 
+  name, 
+  ageLimit, 
+  genres, 
+  description 
+}: MovieInfoProps): JSX.Element => {
   return (
     <div>
       <div className={styles.image}>

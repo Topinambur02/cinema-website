@@ -1,6 +1,7 @@
+import { JSX } from 'react'
 import styles from './Legend.module.scss'
 
-const Legend = () => {
+const Legend = (): JSX.Element => {
   return (
     <div className={styles.legend}>
       <div className={styles.legendItem}>

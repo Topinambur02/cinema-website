@@ -28,7 +28,7 @@ const AppRouter = (): JSX.Element => {
         )
       )}
 
-      {privateRoutes.map(
+      {role === 'admin' &&  privateRoutes.map(
         ({ path, component }: RouteType): JSX.Element => (
           <Route key={path} path={path} element={component} />
         )

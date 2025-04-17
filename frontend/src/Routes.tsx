@@ -69,6 +69,6 @@ export const publicRoutes = [
 export const privateRoutes = [
   {
     path: ADMIN_ROUTE,
-    component: <AdminPage />
-  }
+    component: <AdminPage />,
+  },
 ]

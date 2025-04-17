@@ -25,7 +25,7 @@ function App(): JSX.Element {
   })
 
   useEffect(() => {
-    currentStore.userStore.checkAuth();
+    currentStore.userStore.checkAuth()
   }, [])
 
   return (

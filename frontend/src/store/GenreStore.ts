@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { GenreType } from '../types/GenreType'
 
 export class GenreStore {
-  private genres: Array<GenreType>
+  private genres: GenreType[]
 
   constructor() {
     this.genres = []
@@ -10,11 +10,11 @@ export class GenreStore {
     makeAutoObservable(this)
   }
 
-  public setGenres(genres: Array<GenreType>): void {
+  public setGenres(genres: GenreType[]): void {
     this.genres = genres
   }
 
-  public getGenres(): Array<GenreType> {
+  public getGenres(): GenreType[] {
     return this.genres
   }
 }

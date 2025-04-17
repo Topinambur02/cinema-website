@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { ImageType } from '../types/ImageType'
 
 export class ImageStore {
-  private images: Array<ImageType>
+  private images: ImageType[]
 
   constructor() {
     this.images = []
@@ -10,11 +10,11 @@ export class ImageStore {
     makeAutoObservable(this)
   }
 
-  public setImages(images: Array<ImageType>): void {
+  public setImages(images: ImageType[]): void {
     this.images = images
   }
 
-  public getImages(): Array<ImageType> {
+  public getImages(): ImageType[] {
     return this.images
   }
 }

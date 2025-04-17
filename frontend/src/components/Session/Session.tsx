@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom'
 import styles from './Session.module.scss'
 import formatTime from '../../utils/FormatTime'
 import { SessionProps } from '../../types/props/SessionProps'
+import { JSX } from 'react'
 
-const Session = ({ sessionWithHall, movie }: SessionProps) => {
+const Session = ({ sessionWithHall, movie }: SessionProps): JSX.Element => {
   return (
-    <Link to={'/sessions/' + sessionWithHall.hallId + '/tickets'} key={sessionWithHall.id} className={styles.sessionItem}>
+    <Link
+      to={'/sessions/' + sessionWithHall.hallId + '/tickets'}
+      key={sessionWithHall.id}
+      className={styles.sessionItem}
+    >
       <div className={styles.head}>
         <div className={styles.infoLine}>
           <div className={styles.period}>

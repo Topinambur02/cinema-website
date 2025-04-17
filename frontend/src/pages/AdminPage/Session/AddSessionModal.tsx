@@ -1,13 +1,29 @@
-import { Form, Modal, Select } from "antd"
-import { useContext } from "react"
-import { Context } from "../../../App"
-import { StoresType } from "../../../types/StoresType"
-import SessionApi from "../../../http/SessionApi"
-import { AddSessionModalProps } from "../../../types/props/AddSessionModalProps"
+import { Form, Modal, Select } from 'antd'
+import { ChangeEvent, JSX, useContext } from 'react'
+import { Context } from '../../../App'
+import { StoresType } from '../../../types/StoresType'
+import SessionApi from '../../../http/SessionApi'
+import { AddSessionModalProps } from '../../../types/props/AddSessionModalProps'
 
-const AddSessionModal = ({ isAddModalOpen, setIsAddModalOpen, availableHalls, availableMovies }: AddSessionModalProps) => {
+const AddSessionModal = ({
+  isAddModalOpen,
+  setIsAddModalOpen,
+  availableHalls,
+  availableMovies,
+}: AddSessionModalProps): JSX.Element => {
   const [form] = Form.useForm()
   const { sessionStore } = useContext(Context) as StoresType
+  const onCancel = () => setIsAddModalOpen(false)
+  const onChangeStart = (e: ChangeEvent<HTMLInputElement>) => form.setFieldsValue({ startTime: e.target.value })
+  const onChangeEnd = (e: ChangeEvent<HTMLInputElement>) => form.setFieldsValue({ endTime: e.target.value })
+  const optionMovies = availableMovies.map(movie => ({
+    value: movie.id,
+    label: `ID: ${movie.id} (${movie.name})`,
+  }))
+  const optionHalls = availableHalls.map(hall => ({
+    value: hall.id,
+    label: `ID: ${hall.id} (${hall.name})`,
+  }))
 
   const handleSave = async () => {
     const values = await form.validateFields()
@@ -17,20 +33,22 @@ const AddSessionModal = ({ isAddModalOpen, setIsAddModalOpen, availableHalls, av
   }
 
   return (
-    <Modal
-      title="Добавление сеанса"
-      open={isAddModalOpen}
-      onOk={handleSave}
-      onCancel={() => setIsAddModalOpen(false)}
-    >
+    <Modal title="Добавление сеанса" open={isAddModalOpen} onOk={handleSave} onCancel={onCancel}>
       <Form layout="vertical" form={form}>
-
         <Form.Item label="Время начала" name="startTime">
-          <input type="datetime-local" style={{ width: '100%' }} onChange={e => form.setFieldsValue({ startTime: e.target.value })} />
+          <input
+            type="datetime-local"
+            style={{ width: '100%' }}
+            onChange={onChangeStart}
+          />
         </Form.Item>
 
         <Form.Item label="Время окончания" name="endTime">
-          <input type="datetime-local" style={{ width: '100%' }} onChange={e => form.setFieldsValue({ endTime: e.target.value })} />
+          <input
+            type="datetime-local"
+            style={{ width: '100%' }}
+            onChange={onChangeEnd}
+          />
         </Form.Item>
 
         <Form.Item label="ID фильма" name="movieId">
@@ -39,10 +57,7 @@ const AddSessionModal = ({ isAddModalOpen, setIsAddModalOpen, availableHalls, av
             showSearch
             placeholder="Выберите фильм"
             optionFilterProp="children"
-            options={availableMovies.map(movie => ({
-              value: movie.id,
-              label: `ID: ${movie.id} (${movie.name || 'Без названия'})`
-            }))}
+            options={optionMovies}
           />
         </Form.Item>
 
@@ -52,15 +67,10 @@ const AddSessionModal = ({ isAddModalOpen, setIsAddModalOpen, availableHalls, av
             showSearch
             placeholder="Выберите зал"
             optionFilterProp="children"
-            options={availableHalls.map(hall => ({
-              value: hall.id,
-              label: `ID: ${hall.id} (${hall.name || 'Без названия'})`
-            }))}
+            options={optionHalls}
           />
         </Form.Item>
-
       </Form>
-
     </Modal>
   )
 }
