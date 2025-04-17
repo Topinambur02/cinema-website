@@ -3,21 +3,26 @@ from exception.SeatAlreadyBookedException import SeatAlreadyBookedException
 from model.User import User
 from dto.TicketPurchaseRequest import TicketPurchaseRequest
 from service.SeatService import service as seat_service
-from mapper.SeatMapper import SeatMapper as mapper
+from mapper.SeatMapper import SeatMapper as seat_mapper
 
 class UserService:
     async def purchase_ticket(self, request: TicketPurchaseRequest, user: User):
-        seatId = request.seatId
-        seat = await seat_service.get_by_id(seatId)
+        seatIds = request.seatIds
+        seats = []
 
-        if seat.isBooked:
-            raise SeatAlreadyBookedException()
+        for seatId in seatIds:
+            seat = await seat_service.get_by_id(seatId)
 
-        seat_dict = mapper.to_dict(seat)
-        seat_dict["userId"] = user.id
-        seat_dict["isBooked"] = True
-        updated_dto = UpdateSeatDTO(**seat_dict)
+            if seat.isBooked:
+                raise SeatAlreadyBookedException()
 
-        return await seat_service.update(seatId, updated_dto)
+            seat_dict = seat_mapper.to_dict(seat)
+            seat_dict["userId"] = user.id
+            seat_dict["isBooked"] = True
+            updated_dto = UpdateSeatDTO(**seat_dict)
+            updated_seat = await seat_service.update(seatId, updated_dto)
+            seats.append(updated_seat)
+
+        return seats
 
 service = UserService()

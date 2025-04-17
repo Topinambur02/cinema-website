@@ -1,6 +1,7 @@
 import {
   ABOUT_ROUTE,
   ACCOUNT_ROUTE,
+  ADMIN_ROUTE,
   CINEMAS_ROUTE,
   CONTACT_ROUTE,
   LOGIN_ROUTE,
@@ -9,7 +10,7 @@ import {
   NOT_FOUND_ROUTE,
   REGISTER_ROUTE,
   TICKETS_ROUTE,
-} from './constants/constants'
+} from './constants/routes'
 import MainPage from './pages/MainPage/MainPage'
 import ContactPage from './pages/ContactPage/ContactPage'
 import AboutPage from './pages/AboutPage/AboutPage'
@@ -20,6 +21,7 @@ import TicketsPage from './pages/TicketsPage/TicketsPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
 import AccountPage from './pages/AccountPage/AccountPage'
+import AdminPage from './pages/AdminPage/AdminPanel'
 
 export const publicRoutes = [
   {
@@ -62,4 +64,11 @@ export const publicRoutes = [
     path: ACCOUNT_ROUTE,
     component: <AccountPage />,
   },
+]
+
+export const privateRoutes = [
+  {
+    path: ADMIN_ROUTE,
+    component: <AdminPage />
+  }
 ]

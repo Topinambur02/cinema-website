@@ -12,6 +12,7 @@ import Screen from '../../components/Screen/Screen'
 import Legend from '../../components/Legend/Legend'
 import BackButton from '../../components/BackButton/BackButton'
 import Row from '../../components/Row/Row'
+import { AxiosError } from 'axios'
 
 const TicketsPage = () => {
   const { id } = useParams<{ id: string }>()
@@ -34,11 +35,24 @@ const TicketsPage = () => {
     }
   }
 
-  const seats = seatStore.getSeats()
-  const seatsBySession = seats.filter((seat) => seat.sessionId === Number(id))
+  const handlePurchase = async () => {
+    try {
+      await seatStore.buyTickets()
+      const updatedSeats = await SeatApi.getAll()
+      seatStore.setSeats(updatedSeats)
+      alert("Билеты успешно оплачены!")
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        alert("Ошибка при оплате: " + error.message)
+      }
+    }
+  }
 
-  for (let i = 0; i < seatsBySession.length; i += seatsPerRow) {
-    rows.push(seatsBySession.slice(i, i + seatsPerRow))
+  const seats = seatStore.getSeats().slice().sort((a, b) => a.id - b.id)
+  const seatsByHall = seats.filter((seat) => seat.hallId === Number(id))
+
+  for (let i = 0; i < seatsByHall.length; i += seatsPerRow) {
+    rows.push(seatsByHall.slice(i, i + seatsPerRow))
   }
 
   return (
@@ -60,6 +74,9 @@ const TicketsPage = () => {
           ))}
         </div>
         <Screen />
+      </div>
+      <div className={styles.buttonContainer}>
+        {selectedSeats.length > 0 && <button onClick={handlePurchase} className={styles.buyButton}>Оплатить</button>}
       </div>
     </Layout>
   )

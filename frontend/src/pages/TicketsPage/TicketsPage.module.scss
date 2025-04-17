@@ -1,5 +1,27 @@
 @use '../../scss/variables';
 
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: calc(100% - 144px);
+
+  .buyButton {
+    font-weight: 600;
+    height: 40px;
+    font-size: 16px;
+    line-height: 24px;
+    position: relative;
+    display: inline-block;
+    padding: 0 32px;
+    background: variables.$red;
+    border-radius: 16px;
+    text-align: center;
+    color: variables.$white;
+    cursor: pointer;
+    border: none;
+  }
+}
+
 .container {
   width: 900px;
   margin: 30px auto;

@@ -16,7 +16,7 @@ class Session(Base):
         foreign_keys=[movieId]
     )
     hallId: Mapped[int] = mapped_column(
-        ForeignKey(column="hall.id", ondelete="NO ACTION")
+        ForeignKey(column="hall.id", ondelete="CASCADE")
     )
     hall: Mapped[Hall] = relationship(
         'Hall',

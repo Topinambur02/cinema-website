@@ -6,7 +6,7 @@ import { SessionProps } from '../../types/props/SessionProps'
 
 const Session = ({ sessionWithHall, movie }: SessionProps) => {
   return (
-    <Link to={'/sessions/' + sessionWithHall.id + '/tickets'} key={sessionWithHall.id} className={styles.sessionItem}>
+    <Link to={'/sessions/' + sessionWithHall.hallId + '/tickets'} key={sessionWithHall.id} className={styles.sessionItem}>
       <div className={styles.head}>
         <div className={styles.infoLine}>
           <div className={styles.period}>

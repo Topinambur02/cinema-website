@@ -1,6 +1,7 @@
 import $host from '.'
 import { CreateSeatType } from '../types/CreateSeatType'
 import { SeatType } from '../types/SeatType'
+import { UpdateSeatType } from '../types/UpdateSeatType'
 
 class SeatApi {
   static async getAll(): Promise<SeatType[]> {
@@ -18,7 +19,7 @@ class SeatApi {
     return data
   }
 
-  static async update(id: number, seat: CreateSeatType): Promise<SeatType> {
+  static async update(id: number, seat: UpdateSeatType): Promise<SeatType> {
     const { data } = await $host.put<SeatType>(`/seat/${id}`, seat)
     return data
   }

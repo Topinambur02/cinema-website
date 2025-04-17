@@ -1,6 +1,7 @@
 from exception.HallNotFoundException import HallNotFoundException
 from dto.HallDTO import CreateHallDTO, HallDTO, UpdateHallDTO
 from repository.HallRepository import repository
+from repository.SeatRepository import repository as seat_repository
 from mapper.HallMapper import HallMapper as mapper
 
 class HallService:
@@ -18,8 +19,17 @@ class HallService:
         return mapper.to_dto(dto_model=HallDTO, orm_model=hall)
     
     async def create(self, dto: CreateHallDTO) -> HallDTO:
+        capacity = dto.capacity
+
         hall_dict = mapper.to_dict(dto)
         created_hall = await repository.create(hall_dict)
+
+        for i in range(1, capacity + 1):
+            seat_dict = {
+                'seatNumber': i,
+                'hallId': created_hall.id
+            }
+            await seat_repository.create(seat_dict)
 
         return mapper.to_dto(dto_model=HallDTO, orm_model=created_hall)
     

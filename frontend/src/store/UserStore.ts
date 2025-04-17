@@ -22,17 +22,27 @@ export class UserStore {
     this.user = user
   }
 
-  public getUser() {
-    return this.user
+  public async getCurrentUser() {
+    try {
+      const user = await AuthApi.getCurrentUser()
+      return user.data
+    } catch (error) {
+      this.logout()
+      return null
+    }
   }
 
   async login(email: string, password: string) {
-    const response = await AuthApi.login(email, password)
-    localStorage.setItem('token', response.data.access_token)
-    const user = await AuthApi.getCurrentUser()
-    localStorage.setItem('user', JSON.stringify(user.data))
-    this.setAuth(true)
-    this.setUser(user.data)
+    try {
+      const response = await AuthApi.login(email, password)
+      localStorage.setItem('token', response.data.access_token)
+      await this.checkAuth()
+      window.location.href = '/'
+    } catch (error) {
+      if (error instanceof AxiosError && error.response?.status === 400) {
+        alert('Неверный email или пароль')
+      }
+    }
   }
 
   async register(email: string, password: string, role: string) {
@@ -42,15 +52,28 @@ export class UserStore {
   async logout() {
     try {
       await AuthApi.logout()
-    } catch (error) {
-      if (error instanceof AxiosError && error.response?.status === 401) {
-        console.log('Token expired, logging out...')
-      }
-    } finally {
+    } 
+    finally {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
       this.setAuth(false)
       this.setUser({} as UserType)
+    }
+  }
+
+  async checkAuth() {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      this.logout()
+      return
+    }
+
+    try {
+      const user = await AuthApi.getCurrentUser()
+      this.setAuth(true)
+      this.setUser(user.data)
+    } catch (error) {
+      this.logout()
     }
   }
 }

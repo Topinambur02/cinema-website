@@ -2,19 +2,16 @@ import { ChangeEvent, FormEvent, useContext, useState } from 'react'
 import styles from './LoginForm.module.scss'
 import { Context } from '../../App'
 import { StoresType } from '../../types/StoresType'
-import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
   const { userStore } = useContext(Context) as StoresType
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const navigate = useNavigate()
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     await userStore.login(email, password)
-    navigate('/')
   }
 
   return (
