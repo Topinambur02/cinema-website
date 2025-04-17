@@ -1,5 +1,5 @@
 import { Form, Input, Modal } from 'antd'
-import { JSX, useContext } from 'react'
+import { JSX, useContext, useEffect } from 'react'
 import { Context } from '../../../App'
 import { StoresType } from '../../../types/StoresType'
 import GenresApi from '../../../http/GenresApi'
@@ -9,6 +9,12 @@ const AddGenreModal = ({ isAddModalOpen, setIsAddModalOpen }: AddGenreModalProps
   const [form] = Form.useForm()
   const { genreStore } = useContext(Context) as StoresType
   const onCancel = () => setIsAddModalOpen(false)
+
+  useEffect(() => {
+      if (isAddModalOpen) {
+        form.resetFields()
+      }
+    }, [isAddModalOpen, form])
 
   const handleSave = async () => {
     const values = await form.validateFields()

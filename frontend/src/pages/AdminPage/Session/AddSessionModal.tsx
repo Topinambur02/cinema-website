@@ -1,5 +1,5 @@
 import { Form, Modal, Select } from 'antd'
-import { ChangeEvent, JSX, useContext } from 'react'
+import { ChangeEvent, JSX, useContext, useEffect } from 'react'
 import { Context } from '../../../App'
 import { StoresType } from '../../../types/StoresType'
 import SessionApi from '../../../http/SessionApi'
@@ -24,6 +24,12 @@ const AddSessionModal = ({
     value: hall.id,
     label: `ID: ${hall.id} (${hall.name})`,
   }))
+
+  useEffect(() => {
+      if (isAddModalOpen) {
+        form.resetFields()
+      }
+    }, [isAddModalOpen, form])
 
   const handleSave = async () => {
     const values = await form.validateFields()
