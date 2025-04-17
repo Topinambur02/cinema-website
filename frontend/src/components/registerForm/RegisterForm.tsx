@@ -1,24 +1,42 @@
-import { ChangeEvent, FormEvent, JSX, useContext, useState } from 'react'
+import { ChangeEvent, FormEvent, JSX, useContext, useEffect, useState } from 'react'
 import { Context } from '../../App'
 import { StoresType } from '../../types/StoresType'
 import styles from './RegisterForm.module.scss'
-import { useNavigate } from 'react-router-dom'
 
 const RegisterForm = (): JSX.Element => {
   const { userStore } = useContext(Context) as StoresType
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const navigate = useNavigate()
+  const [isRegistered, setIsRegistered] = useState(false)
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    await userStore.register(email, password, 'user')
-    navigate('/')
+    try {
+      e.preventDefault()
+      await userStore.register(email, password, 'user')
+      setIsRegistered(true)
+      setEmail('')
+      setPassword('')
+    } catch (error) {
+      console.error('Registration failed:', error)
+    }
   }
+
+  useEffect(() => {
+    if (isRegistered) {
+      const timer = setTimeout(() => setIsRegistered(false), 3000)
+      return () => clearTimeout(timer)
+    }
+  }, [isRegistered])
 
   return (
     <form name="register" method="post" onSubmit={handleSubmit}>
+      {isRegistered && (
+        <div className={styles.successMessage}>
+          Регистрация прошла успешно! Можете войти в систему.
+        </div>
+      )}
+
       <div className={styles.formItem}>
         <input
           id="email"

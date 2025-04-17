@@ -1,9 +1,6 @@
 import { BrowserRouter } from 'react-router-dom'
 import './App.css'
-import AppRouter from './components/AppRouter'
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
-import { createContext, JSX, useState } from 'react'
+import { createContext, JSX, useEffect, useState } from 'react'
 import { MovieStore } from './store/MovieStore'
 import { StoresType } from './types/StoresType'
 import { ImageStore } from './store/ImageStore'
@@ -12,6 +9,7 @@ import { SessionStore } from './store/SessionStore'
 import { HallStore } from './store/HallStore'
 import { SeatStore } from './store/SeatStore'
 import { UserStore } from './store/UserStore'
+import AppContent from './AppContent'
 
 export const Context = createContext<StoresType | null>(null)
 
@@ -26,13 +24,15 @@ function App(): JSX.Element {
     userStore: new UserStore(),
   })
 
+  useEffect(() => {
+    currentStore.userStore.checkAuth();
+  }, [])
+
   return (
     <div className="App">
       <Context.Provider value={currentStore}>
         <BrowserRouter>
-          <Header />
-          <AppRouter />
-          <Footer />
+          <AppContent />
         </BrowserRouter>
       </Context.Provider>
     </div>

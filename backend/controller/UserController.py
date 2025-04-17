@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from auth.auth_router import fastapi_users
+from dto.SeatDTO import SeatDTO
 from dto.UserDTO import UpdateUserDTO, UserDTO
 from enums.Role import Role
 from model.User import User
@@ -13,9 +14,9 @@ user_router.include_router(
     fastapi_users.get_users_router(UserDTO, UpdateUserDTO)
 )
 
-@user_router.post("/ticket")
+@user_router.post("/tickets")
 async def purchase_ticket(
     request: TicketPurchaseRequest, 
     user: User = Depends(role_required([Role.ADMIN, Role.USER]))
-):
+) -> list[SeatDTO]:
     return await service.purchase_ticket(request, user)

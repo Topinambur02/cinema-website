@@ -1,8 +1,7 @@
 export type SeatType = {
   id: number
   seatNumber: number
-  sessionId: number
+  hallId: number
   isBooked: boolean
-  price: number
   userId: number
 }

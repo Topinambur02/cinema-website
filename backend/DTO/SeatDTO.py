@@ -4,22 +4,19 @@ from pydantic import BaseModel
 class SeatDTO(BaseModel):
     id: int
     seatNumber: int
-    sessionId: int
+    hallId: int
     isBooked: bool
-    price: int
     userId: Optional[int] = None
 
 class CreateSeatDTO(BaseModel):
     seatNumber: int
-    sessionId: int
-    price: int
+    hallId: int
 
 class UpdateSeatDTO(BaseModel):
     seatNumber: int
     isBooked: bool
-    sessionId: int
+    hallId: int
     userId: int
-    price: int
 
 DTOType = TypeVar("DTOType", bound=SeatDTO)
 CreateDTOType = TypeVar("CreateDTOType", bound=CreateSeatDTO)
