@@ -15,7 +15,6 @@ const AccountPage = (): JSX.Element => {
     navigate('/')
   }
 
-
   useEffect(() => {
     const fetchUser = async () => {
       const fetchedUser = await userStore.getCurrentUser()
@@ -32,12 +31,10 @@ const AccountPage = (): JSX.Element => {
         <button className={styles.logout} onClick={handleLogout}>
           Выход
         </button>
-        {
-          user?.role === 'admin' && (
-            <button className={styles.logout} onClick={() => navigate('/admin')}>
-              Админ-панель
-            </button>
-          )
+        {user?.role === 'admin' && 
+          <button className={styles.logout} onClick={() => navigate('/admin')}>
+            Админ-панель
+          </button>
         }
       </div>
     </Layout>

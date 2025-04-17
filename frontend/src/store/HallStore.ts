@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { HallType } from '../types/HallType'
 
 export class HallStore {
-  private halls: Array<HallType>
+  private halls: HallType[]
 
   constructor() {
     this.halls = []
@@ -10,11 +10,11 @@ export class HallStore {
     makeAutoObservable(this)
   }
 
-  public setHalls(halls: Array<HallType>): void {
+  public setHalls(halls: HallType[]): void {
     this.halls = halls
   }
 
-  public getHalls(): Array<HallType> {
+  public getHalls(): HallType[] {
     return this.halls
   }
 }

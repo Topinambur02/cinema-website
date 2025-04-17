@@ -1,8 +1,9 @@
+import { JSX } from 'react'
 import Menu from '../components/Menu/Menu'
 import { LayoutProps } from '../types/props/LayoutProps'
 import styles from './Layout.module.scss'
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
     <div className={styles.page}>
       <div className={styles.container}>

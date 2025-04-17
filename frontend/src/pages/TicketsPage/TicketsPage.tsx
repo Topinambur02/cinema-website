@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import Layout from '../Layout'
 import styles from './TicketsPage.module.scss'
-import { useContext, useEffect, useState } from 'react'
+import { JSX, useContext, useEffect, useState } from 'react'
 import SeatApi from '../../http/SeatApi'
 import { Context } from '../../App'
 import { StoresType } from '../../types/StoresType'
@@ -14,7 +14,7 @@ import BackButton from '../../components/BackButton/BackButton'
 import Row from '../../components/Row/Row'
 import { AxiosError } from 'axios'
 
-const TicketsPage = () => {
+const TicketsPage = (): JSX.Element => {
   const { id } = useParams<{ id: string }>()
   const { seatStore, userStore } = useContext(Context) as StoresType
   const [showLoginModal, setShowLoginModal] = useState(false)
@@ -24,13 +24,22 @@ const TicketsPage = () => {
   const rows = []
 
   useEffect(() => {
-    SeatApi.getAll().then((data) => seatStore.setSeats(data))
+    const fetchData = async () => {
+      const [seats] = await Promise.all([
+        SeatApi.getAll()
+      ])
+      seatStore.setSeats(seats)
+    }
+
+    fetchData()
   }, [])
 
   const handleSeatClick = (seat: SeatType) => {
     if (!userStore.isAuth) {
       setShowLoginModal(true)
-    } else {
+    }
+
+    else {
       seatStore.toggleSeatSelection(seat.id)
     }
   }
@@ -40,19 +49,25 @@ const TicketsPage = () => {
       await seatStore.buyTickets()
       const updatedSeats = await SeatApi.getAll()
       seatStore.setSeats(updatedSeats)
-      alert("Билеты успешно оплачены!")
-    } catch (error) {
+      alert('Билеты успешно оплачены!')
+    } 
+    
+    catch (error) {
       if (error instanceof AxiosError) {
-        alert("Ошибка при оплате: " + error.message)
+        alert('Ошибка при оплате: ' + error.message)
       }
     }
   }
 
-  const seats = seatStore.getSeats().slice().sort((a, b) => a.id - b.id)
-  const seatsByHall = seats.filter((seat) => seat.hallId === Number(id))
+  const seats = seatStore
+    .getSeats()
+    .slice()
+    .sort((a, b) => a.id - b.id)
+  const seatsByHall = seats.filter(seat => seat.hallId === Number(id))
 
   for (let i = 0; i < seatsByHall.length; i += seatsPerRow) {
-    rows.push(seatsByHall.slice(i, i + seatsPerRow))
+    const row = seatsByHall.slice(i, i + seatsPerRow)
+    rows.push(row)
   }
 
   return (
@@ -76,7 +91,11 @@ const TicketsPage = () => {
         <Screen />
       </div>
       <div className={styles.buttonContainer}>
-        {selectedSeats.length > 0 && <button onClick={handlePurchase} className={styles.buyButton}>Оплатить</button>}
+        {selectedSeats.length > 0 && (
+          <button onClick={handlePurchase} className={styles.buyButton}>
+            Оплатить
+          </button>
+        )}
       </div>
     </Layout>
   )

@@ -14,45 +14,50 @@ export class UserStore {
     makeAutoObservable(this)
   }
 
-  public setAuth(bool: boolean) {
+  public setAuth(bool: boolean): void {
     this.isAuth = bool
   }
 
-  public setUser(user: UserType) {
+  protected setUser(user: UserType): void {
     this.user = user
   }
 
-  public async getCurrentUser() {
+  public async getCurrentUser(): Promise<UserType | null> {
     try {
       const user = await AuthApi.getCurrentUser()
       return user.data
-    } catch (error) {
+    } 
+    
+    catch (error) {
       this.logout()
       return null
     }
   }
 
-  async login(email: string, password: string) {
+  public async login(email: string, password: string): Promise<void> {
     try {
       const response = await AuthApi.login(email, password)
       localStorage.setItem('token', response.data.access_token)
       await this.checkAuth()
       window.location.href = '/'
-    } catch (error) {
+    } 
+    
+    catch (error) {
       if (error instanceof AxiosError && error.response?.status === 400) {
         alert('Неверный email или пароль')
       }
     }
   }
 
-  async register(email: string, password: string, role: string) {
+  public async register(email: string, password: string, role: string): Promise<void> {
     await AuthApi.register(email, password, role)
   }
 
-  async logout() {
+  public async logout(): Promise<void> {
     try {
       await AuthApi.logout()
     } 
+    
     finally {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
@@ -61,8 +66,9 @@ export class UserStore {
     }
   }
 
-  async checkAuth() {
+  public async checkAuth(): Promise<void> {
     const token = localStorage.getItem('token')
+
     if (!token) {
       this.logout()
       return
@@ -70,9 +76,12 @@ export class UserStore {
 
     try {
       const user = await AuthApi.getCurrentUser()
+      
       this.setAuth(true)
       this.setUser(user.data)
-    } catch (error) {
+    } 
+    
+    catch (error) {
       this.logout()
     }
   }

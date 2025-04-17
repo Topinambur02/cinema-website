@@ -17,7 +17,7 @@ const Movie = ({ movie }: MovieProps): JSX.Element => {
           {movie.name}
         </Link>
         <div className={styles.category}>
-          <Link to={'/movies/' + movie.id}>{movie.listOfGenres?.map((genre) => genre.name).join(', ')}</Link>
+          <Link to={'/movies/' + movie.id}>{movie.listOfGenres?.map(genre => genre.name).join(', ')}</Link>
         </div>
       </div>
     </div>

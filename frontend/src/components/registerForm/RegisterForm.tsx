@@ -17,7 +17,8 @@ const RegisterForm = (): JSX.Element => {
       setIsRegistered(true)
       setEmail('')
       setPassword('')
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Registration failed:', error)
     }
   }
@@ -30,12 +31,12 @@ const RegisterForm = (): JSX.Element => {
   }, [isRegistered])
 
   return (
-    <form name="register" method="post" onSubmit={handleSubmit}>
-      {isRegistered && (
-        <div className={styles.successMessage}>
-          Регистрация прошла успешно! Можете войти в систему.
-        </div>
-      )}
+    <form
+      name="register"
+      method="post"
+      onSubmit={handleSubmit}
+    >
+      {isRegistered && <div className={styles.successMessage}>Регистрация прошла успешно! Можете войти в систему.</div>}
 
       <div className={styles.formItem}>
         <input

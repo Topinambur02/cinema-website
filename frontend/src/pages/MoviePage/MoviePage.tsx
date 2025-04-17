@@ -11,7 +11,6 @@ import MoviesApi from '../../http/MoviesApi'
 import { MovieTypeWithImageAndGenres } from '../../types/MovieTypeWithImageAndGenres'
 import ImagesApi from '../../http/ImagesApi'
 import GenresApi from '../../http/GenresApi'
-import { GenreType } from '../../types/GenreType'
 import Session from '../../components/Session/Session'
 import MovieInfo from '../../components/MovieInfo/MovieInfo'
 
@@ -25,21 +24,21 @@ const MoviePage = (): JSX.Element => {
       const movie = await MoviesApi.getById(Number(id))
       const image = await ImagesApi.getById(movie.imageID)
       const genres = await GenresApi.getAll()
-      const listOfGenres = genres.filter((genre: GenreType) => movie.genres_ids.includes(genre.id))
+      const listOfGenres = genres.filter(genre => movie.genres_ids.includes(genre.id))
       setMovie({ ...movie, image, listOfGenres })
     }
-    SessionApi.getAll().then((data) => sessionStore.setSessions(data))
-    HallApi.getAll().then((data) => hallStore.setHalls(data))
+    SessionApi.getAll().then(data => sessionStore.setSessions(data))
+    HallApi.getAll().then(data => hallStore.setHalls(data))
     fetchData()
   }, [])
 
-  const genres = movie.listOfGenres?.map((genre) => genre.name)
+  const genres = movie.listOfGenres?.map(genre => genre.name)
   const halls = hallStore.getHalls()
   const sessions = sessionStore.getSessions()
-  const sessionsForMovie = sessions.filter((session) => session.movieId === movie.id)
-  const sessionsWithHall = sessionsForMovie.map((session) => ({
+  const sessionsForMovie = sessions.filter(session => session.movieId === movie.id)
+  const sessionsWithHall = sessionsForMovie.map(session => ({
     ...session,
-    hall: halls.find((hall) => hall.id === session.hallId) || null,
+    hall: halls.find(hall => hall.id === session.hallId) || null,
   }))
 
   return (
@@ -62,7 +61,7 @@ const MoviePage = (): JSX.Element => {
       </div>
 
       <div className={styles.sessionBox}>
-        {sessionsWithHall.map((sessionWithHall) => (
+        {sessionsWithHall.map(sessionWithHall => (
           <Session key={sessionWithHall.id} sessionWithHall={sessionWithHall} movie={movie} />
         ))}
       </div>

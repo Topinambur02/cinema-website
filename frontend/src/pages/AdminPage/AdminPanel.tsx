@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { JSX, useContext, useEffect, useState } from 'react'
 import { ConfigProvider, Layout, theme } from 'antd'
 import { Context } from '../../App'
 import { StoresType } from '../../types/StoresType'
@@ -12,65 +12,64 @@ import SessionApi from '../../http/SessionApi'
 import SeatApi from '../../http/SeatApi'
 import AdminRouter from './AdminRouter'
 
-const AdminPage = () => {
-    const { movieStore, imageStore, genreStore, hallStore, sessionStore, seatStore } = useContext(Context) as StoresType
-    const [selectedKey, setSelectedKey] = useState(() => {
-        if (typeof window !== 'undefined') {
-            return localStorage.getItem('selectedKey') ?? '1'
-        }
-        return '1'
-    })
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const [images, genres, movies, halls, sessions, seats] = await Promise.all([
-                ImagesApi.getAll(),
-                GenresApi.getAll(),
-                MoviesApi.getAll(),
-                HallApi.getAll(),
-                SessionApi.getAll(),
-                SeatApi.getAll()
-            ])
-            imageStore.setImages(images)
-            genreStore.setGenres(genres)
-            movieStore.setMovies(movies)
-            hallStore.setHalls(halls)
-            sessionStore.setSessions(sessions)
-            seatStore.setSeats(seats)
-        }
-        fetchData()
-    }, [selectedKey])
-
-    const movies = movieStore.getMovies()
-    const images = imageStore.getImages()
-    const genres = genreStore.getGenres()
-    const halls = hallStore.getHalls()
-
-    const handleMenuSelect = async ({ key }: { key: string }) => {
-        setSelectedKey(key)
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('selectedKey', key)
-        }
+const AdminPage = (): JSX.Element => {
+  const { movieStore, imageStore, genreStore, hallStore, sessionStore, seatStore } = useContext(Context) as StoresType
+  const [selectedKey, setSelectedKey] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('selectedKey') ?? '1'
     }
 
-    return (
-        <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
-            <Layout>
-                <AdminMenu
-                    selectedKey={selectedKey}
-                    handleMenuSelect={handleMenuSelect}
-                />
+    return '1'
+  })
 
-                <AdminRouter
-                    selectedKey={selectedKey}
-                    images={images}
-                    genres={genres}
-                    movies={movies}
-                    halls={halls}
-                />
-            </Layout>
-        </ConfigProvider>
-    )
+  useEffect(() => {
+    const fetchData = async () => {
+      const [images, genres, movies, halls, sessions, seats] = await Promise.all([
+        ImagesApi.getAll(),
+        GenresApi.getAll(),
+        MoviesApi.getAll(),
+        HallApi.getAll(),
+        SessionApi.getAll(),
+        SeatApi.getAll(),
+      ])
+      imageStore.setImages(images)
+      genreStore.setGenres(genres)
+      movieStore.setMovies(movies)
+      hallStore.setHalls(halls)
+      sessionStore.setSessions(sessions)
+      seatStore.setSeats(seats)
+    }
+    fetchData()
+  }, [selectedKey])
+
+  const movies = movieStore.getMovies()
+  const images = imageStore.getImages()
+  const genres = genreStore.getGenres()
+  const halls = hallStore.getHalls()
+
+  const handleMenuSelect = async ({ key }: { key: string }) => {
+    setSelectedKey(key)
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('selectedKey', key)
+    }
+  }
+
+  return (
+    <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
+      <Layout>
+        <AdminMenu selectedKey={selectedKey} handleMenuSelect={handleMenuSelect} />
+
+        <AdminRouter
+          selectedKey={selectedKey}
+          images={images}
+          genres={genres}
+          movies={movies}
+          halls={halls}
+        />
+      </Layout>
+    </ConfigProvider>
+  )
 }
 
 export default observer(AdminPage)

@@ -4,5 +4,5 @@ export type MovieType = {
   imageID: number
   description: string
   ageLimit: string
-  genres_ids: Array<number>
+  genres_ids: number[]
 }

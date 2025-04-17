@@ -4,7 +4,7 @@ import UserApi from '../http/UserApi'
 import { TicketPurchaseRequestType } from '../types/TicketPurchaseRequestType'
 
 export class SeatStore {
-  private seats: Array<SeatType>
+  private seats: SeatType[]
   private selectedSeats: number[] = []
 
   constructor() {
@@ -13,11 +13,11 @@ export class SeatStore {
     makeAutoObservable(this)
   }
 
-  public setSeats(seats: Array<SeatType>): void {
+  public setSeats(seats: SeatType[]): void {
     this.seats = seats
   }
 
-  public getSeats(): Array<SeatType> {
+  public getSeats(): SeatType[] {
     return this.seats
   }
 
@@ -25,32 +25,32 @@ export class SeatStore {
     return this.selectedSeats
   }
 
-  public async buyTickets() {
+  public async buyTickets(): Promise<void> {
     try {
-        const request: TicketPurchaseRequestType = {
-            seatIds: this.selectedSeats
-        }
-        const updatedSeats = await UserApi.purchaseTickets(request)
-        
-        this.seats = this.seats.map(seat => 
-            updatedSeats.some(s => s.id === seat.id) 
-                ? {...seat, isBooked: true}
-                : seat
-        )
-        
-        this.selectedSeats = []
-    } catch (error) {
-        console.error("Ошибка покупки:", error)
-    }
-}
+      const request: TicketPurchaseRequestType = { seatIds: this.selectedSeats }
+      const updatedSeats = await UserApi.purchaseTickets(request)
 
-  public toggleSeatSelection = (seatId: number) => {
+      this.seats = this.seats.map(seat =>
+        updatedSeats.some(s => s.id === seat.id) ? { ...seat, isBooked: true } : seat
+      )
+
+      this.selectedSeats = []
+    } 
+    
+    catch (error) {
+      console.error('Ошибка покупки:', error)
+    }
+  }
+
+  public toggleSeatSelection(seatId: number): void {
     const seat = this.seats.find(s => s.id === seatId)
     if (seat?.isBooked) return
 
     if (this.selectedSeats.includes(seatId)) {
-      this.selectedSeats = this.selectedSeats.filter((id) => id !== seatId)
-    } else {
+      this.selectedSeats = this.selectedSeats.filter(id => id !== seatId)
+    } 
+    
+    else {
       this.selectedSeats.push(seatId)
     }
   }
