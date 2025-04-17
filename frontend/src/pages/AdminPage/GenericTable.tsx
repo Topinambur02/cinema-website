@@ -25,7 +25,6 @@ const GenericTable = <T extends object>({
         bordered
         className={styles.table}
         dataSource={dataSource}
-        pagination={false}
         columns={columns}
         rowKey={rowKey}
       />
