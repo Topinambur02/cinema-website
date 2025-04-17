@@ -26,7 +26,7 @@ const Session = ({ sessionWithHall, movie }: SessionProps): JSX.Element => {
         <div className={styles.name}>{sessionWithHall.hall?.name}</div>
         <div className={styles.place}>
           {' '}
-          <Armchair /> 550₽
+          <Armchair /> {sessionWithHall.hall?.price}₽
         </div>
       </div>
     </Link>

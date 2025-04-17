@@ -1,6 +1,6 @@
 import { Form, Input, InputNumber, Modal } from 'antd'
 import HallApi from '../../../http/HallApi'
-import { JSX, useContext } from 'react'
+import { JSX, useContext, useEffect } from 'react'
 import { Context } from '../../../App'
 import { StoresType } from '../../../types/StoresType'
 import { AddHallModalProps } from '../../../types/props/AddHallModalProps'
@@ -9,6 +9,12 @@ const AddHallModal = ({ isAddModalOpen, setIsAddModalOpen }: AddHallModalProps):
   const [form] = Form.useForm()
   const { hallStore } = useContext(Context) as StoresType
   const onCancel = () => setIsAddModalOpen(false)
+
+  useEffect(() => {
+      if (isAddModalOpen) {
+        form.resetFields()
+      }
+    }, [isAddModalOpen, form])
 
   const handleSave = async () => {
     const values = await form.validateFields()

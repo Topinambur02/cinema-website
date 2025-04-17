@@ -10,23 +10,31 @@ const TicketsChart = (): JSX.Element => {
   const { seatStore, sessionStore, movieStore, hallStore } = useContext(Context) as StoresType
 
   const getChartData = () => {
-    return sessionStore.getSessions().map(session => {
+    const sessions = sessionStore.getSessions()
+
+    const moviesData = sessions.reduce((acc, session) => {
+      const movie = movieStore.getMovies().find(m => m.id === session.movieId)
       const hall = hallStore.getHalls().find(h => h.id === session.hallId)
 
       const soldTickets = seatStore
         .getSeats()
-        .filter(seat => seat.hallId === hall?.id && seat.isBooked === true).length
+        .filter(seat => seat.hallId === hall?.id && seat.isBooked).length
 
-      const movie = movieStore.getMovies().find(m => m.id === session.movieId)
-      const time = new Date(session.endTime).getTime() - new Date(session.startTime).getTime()
+      const movieName = movie?.name ?? ''
 
-      return {
-        session: `Сеанс #${session.id}`,
-        movie: movie?.name,
-        time: time,
-        tickets: soldTickets,
+      if (acc[movieName]) {
+        acc[movieName] += soldTickets
+      } else {
+        acc[movieName] = soldTickets
       }
-    })
+
+      return acc
+    }, {} as Record<string, number>)
+
+    return Object.entries(moviesData).map(([movie, tickets]) => ({
+      movie,
+      tickets,
+    }))
   }
 
   const config = {
@@ -34,21 +42,14 @@ const TicketsChart = (): JSX.Element => {
     data: getChartData(),
     xField: 'movie',
     yField: 'tickets',
-    isGroup: true,
-    label: {
-      style: { fill: '#FFF' },
-    },
-    tooltip: {
-      fields: ['movie', 'time', 'tickets'],
-    },
-    xAxis: { title: { text: 'Фильмы' } },
-    yAxis: { title: { text: 'Проданные билеты' } },
+    columnWidth: 5,
   }
 
   return (
     <div className={styles.container}>
       <BackButton />
-      <Column title={'Проданные билеты'} {...config} />
+      <h1>Продажа билетов</h1>
+      <Column className={styles.chart} {...config} />
     </div>
   )
 }

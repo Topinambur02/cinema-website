@@ -3,7 +3,7 @@ import { AddMovieModalProps } from '../../../types/props/AddMovieModalProps'
 import MoviesApi from '../../../http/MoviesApi'
 import { StoresType } from '../../../types/StoresType'
 import { Context } from '../../../App'
-import { JSX, useContext } from 'react'
+import { JSX, useContext, useEffect } from 'react'
 import { options } from '../../../constants/options'
 
 const AddMovieModal = ({
@@ -23,6 +23,12 @@ const AddMovieModal = ({
     value: genre.id,
     label: `ID: ${genre.id} (${genre.name})`,
   }))
+
+  useEffect(() => {
+    if (isAddModalOpen) {
+      form.resetFields()
+    }
+  }, [isAddModalOpen, form])
 
   const handleSave = async () => {
     const values = await form.validateFields()
