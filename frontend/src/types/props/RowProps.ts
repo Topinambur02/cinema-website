@@ -5,4 +5,5 @@ export interface RowProps {
   rowIndex: number
   selectedSeats: number[]
   handleSeatClick: (seat: SeatType) => void
+  idPurchasedSeats: number[]
 }

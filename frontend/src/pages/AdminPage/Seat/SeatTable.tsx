@@ -31,18 +31,6 @@ const SeatTable = ({
     { title: 'Номер места', dataIndex: 'seatNumber', key: 'seatNumber' },
     { title: 'ID зала', dataIndex: 'hallId', key: 'hallId' },
     {
-      title: 'Забронировано',
-      dataIndex: 'isBooked',
-      key: 'isBooked',
-      render: (isBooked: boolean) => (isBooked ? 'Да' : 'Нет'),
-    },
-    {
-      title: 'ID пользователя',
-      dataIndex: 'userId',
-      key: 'userId',
-      render: (userId: number | null) => userId ?? '—',
-    },
-    {
       title: 'Действия',
       key: 'actions',
       render: (_: any, record: SeatType) => (

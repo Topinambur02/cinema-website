@@ -8,7 +8,8 @@ const Row = ({
   row,
   rowIndex,
   selectedSeats,
-  handleSeatClick
+  handleSeatClick,
+  idPurchasedSeats
 }: RowProps): JSX.Element => {
   return (
     <div key={rowIndex} className={styles.row}>
@@ -20,6 +21,7 @@ const Row = ({
             seat={seat}
             selectedSeats={selectedSeats}
             handleSeatClick={handleSeatClick}
+            idPurchasedSeats={idPurchasedSeats}
           />
         ))}
       </div>

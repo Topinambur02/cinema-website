@@ -10,6 +10,7 @@ import { HallStore } from './store/HallStore'
 import { SeatStore } from './store/SeatStore'
 import { UserStore } from './store/UserStore'
 import AppContent from './AppContent'
+import { BookingStore } from './store/BookingStore'
 
 export const Context = createContext<StoresType | null>(null)
 
@@ -22,6 +23,7 @@ function App(): JSX.Element {
     hallStore: new HallStore(),
     seatStore: new SeatStore(),
     userStore: new UserStore(),
+    bookingStore: new BookingStore()
   })
 
   useEffect(() => {

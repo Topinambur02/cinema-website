@@ -13,46 +13,64 @@ import Legend from '../../components/Legend/Legend'
 import BackButton from '../../components/BackButton/BackButton'
 import Row from '../../components/Row/Row'
 import { AxiosError } from 'axios'
+import BookingApi from '../../http/BookingApi'
 
 const TicketsPage = (): JSX.Element => {
-  const { id } = useParams<{ id: string }>()
-  const { seatStore, userStore } = useContext(Context) as StoresType
+  const { hall_id } = useParams<{ hall_id: string }>()
+  const { session_id } = useParams<{ session_id: string }>()
+  const { seatStore, userStore, bookingStore } = useContext(Context) as StoresType
   const [showLoginModal, setShowLoginModal] = useState(false)
   const onClose = () => setShowLoginModal(false)
-  const selectedSeats = seatStore.getSelectedSeats()
   const seatsPerRow = 8
+  const selectedSeats = bookingStore.getSelectedSeats()
   const rows = []
 
   useEffect(() => {
     const fetchData = async () => {
-      const [seats] = await Promise.all([
-        SeatApi.getAll()
+      const [seats, bookings] = await Promise.all([
+        SeatApi.getAll(),
+        BookingApi.getAll()
       ])
       seatStore.setSeats(seats)
+      bookingStore.setBookings(bookings)
     }
 
     fetchData()
   }, [])
 
+  const idPurchasedSeats = bookingStore.getBookings()
+    .filter(booking => booking.sessionId === Number(session_id))
+    .map(booking => booking.seatId)
+
   const handleSeatClick = (seat: SeatType) => {
+    if (idPurchasedSeats.includes(seat.id)) {
+      return
+    }
+
     if (!userStore.isAuth) {
       setShowLoginModal(true)
     }
 
     else {
-      seatStore.toggleSeatSelection(seat.id)
+      const currentSelected = bookingStore.getSelectedSeats()
+      const isSelected = currentSelected.includes(seat.id)
+
+      if (isSelected) {
+        bookingStore.setSelectedSeats(currentSelected.filter(id => id !== seat.id))
+      } else {
+        bookingStore.setSelectedSeats([...currentSelected, seat.id])
+      }
     }
   }
 
   const handlePurchase = async () => {
     try {
-      await seatStore.buyTickets()
-      const updatedSeats = await SeatApi.getAll()
-      seatStore.setSeats(updatedSeats)
+      const dtos = selectedSeats.map(seatId => ({ seatId, sessionId: Number(session_id) }))
+      const newBookings = await BookingApi.create(dtos)
+      bookingStore.setBookings([...bookingStore.getBookings(), ...newBookings])
+      bookingStore.setSelectedSeats([])
       alert('Билеты успешно оплачены!')
-    } 
-    
-    catch (error) {
+    } catch (error) {
       if (error instanceof AxiosError) {
         alert('Ошибка при оплате: ' + error.message)
       }
@@ -63,7 +81,7 @@ const TicketsPage = (): JSX.Element => {
     .getSeats()
     .slice()
     .sort((a, b) => a.id - b.id)
-  const seatsByHall = seats.filter(seat => seat.hallId === Number(id))
+  const seatsByHall = seats.filter(seat => seat.hallId === Number(hall_id))
 
   for (let i = 0; i < seatsByHall.length; i += seatsPerRow) {
     const row = seatsByHall.slice(i, i + seatsPerRow)
@@ -85,6 +103,7 @@ const TicketsPage = (): JSX.Element => {
               rowIndex={rowIndex}
               selectedSeats={selectedSeats}
               handleSeatClick={handleSeatClick}
+              idPurchasedSeats={idPurchasedSeats}
             />
           ))}
         </div>
