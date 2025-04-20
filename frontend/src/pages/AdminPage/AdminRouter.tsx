@@ -13,13 +13,17 @@ import SeatAdminPanel from './Seat/SeatAdminPanel'
 import SessionAdminPanel from './Session/SessionAdminPanel'
 import { AdminRouterProps } from '../../types/props/AdminRouterProps'
 import TicketsChart from './TicketsChart/TicketsChart'
+import BookingAdminPanel from './Booking/BookingAdminPanel'
+import { BookingType } from '../../types/BookingType'
 
 const AdminRouter = ({
   selectedKey,
   images,
   genres,
   movies,
-  halls
+  halls,
+  sessions,
+  seats,
 }: AdminRouterProps): JSX.Element => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
@@ -29,6 +33,7 @@ const AdminRouter = ({
   const [selectedSession, setSelectedSession] = useState<SessionType | null>(null)
   const [selectedSeat, setSelectedSeat] = useState<SeatType | null>(null)
   const [selectedImage, setSelectedImage] = useState<ImageType | null>(null)
+  const [selectedBooking, setSelectedBooking] = useState<BookingType | null>(null)
 
   return (
     <div>
@@ -97,7 +102,19 @@ const AdminRouter = ({
             movies={movies}
           />
         ) ||
-        (selectedKey === '7' && <TicketsChart />)}
+        (selectedKey === '7' &&
+          <BookingAdminPanel
+            isAddModalOpen={isAddModalOpen}
+            setIsAddModalOpen={setIsAddModalOpen}
+            isEditModalOpen={isEditModalOpen}
+            setIsEditModalOpen={setIsEditModalOpen}
+            selectedBooking={selectedBooking}
+            setSelectedBooking={setSelectedBooking}
+            availableSeats={seats}
+            availableSessions={sessions}
+          />
+        ) ||
+        (selectedKey === '8' && <TicketsChart />)}
     </div>
   )
 }

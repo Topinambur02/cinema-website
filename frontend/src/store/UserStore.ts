@@ -22,6 +22,10 @@ export class UserStore {
     this.user = user
   }
 
+  public getUser(): UserType | null {
+    return this.user
+  }
+
   public async getCurrentUser(): Promise<UserType | null> {
     try {
       const user = await AuthApi.getCurrentUser()

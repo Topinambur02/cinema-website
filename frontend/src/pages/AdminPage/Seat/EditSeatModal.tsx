@@ -47,12 +47,6 @@ const EditSeatModal = ({
         <Form.Item label="Номер места" name="number">
           <InputNumber style={{ width: '100%' }} />
         </Form.Item>
-        <Form.Item label="Забронировано" name="isBooked">
-          <Select style={{ width: '100%' }}>
-            <Select.Option value={false}>Нет</Select.Option>
-            <Select.Option value={true}>Да</Select.Option>
-          </Select>
-        </Form.Item>
         <Form.Item label="ID зала" name="hallId">
           <Select
             style={{ width: '100%' }}
@@ -61,12 +55,6 @@ const EditSeatModal = ({
             optionFilterProp="children"
             options={optionHalls}
           />
-        </Form.Item>
-        <Form.Item label="ID пользователя" name={'userId'}>
-          <InputNumber style={{ width: '100%' }} />
-        </Form.Item>
-        <Form.Item label="Цена" name="price">
-          <InputNumber style={{ width: '100%' }} />
         </Form.Item>
       </Form>
     </Modal>

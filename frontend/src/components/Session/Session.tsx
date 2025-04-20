@@ -8,7 +8,7 @@ import { JSX } from 'react'
 const Session = ({ sessionWithHall, movie }: SessionProps): JSX.Element => {
   return (
     <Link
-      to={'/sessions/' + sessionWithHall.hallId + '/tickets'}
+      to={'/sessions/' + sessionWithHall.hallId + '/tickets/' + sessionWithHall.id}
       key={sessionWithHall.id}
       className={styles.sessionItem}
     >

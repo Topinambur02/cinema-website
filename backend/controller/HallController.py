@@ -1,7 +1,6 @@
-from fastapi import APIRouter, Depends
-from enums.Role import Role
+from fastapi import APIRouter
 from service.HallService import service
-from dependencies.Security import admin_dependency, role_required
+from dependencies.Security import admin_dependency
 from dto.HallDTO import (
     CreateHallDTO, 
     HallDTO, 

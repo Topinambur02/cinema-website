@@ -25,6 +25,10 @@ export const items = [
   },
   {
     key: '7',
+    label: 'Бронирование',
+  },
+  {
+    key: '8',
     label: 'Статистика',
   },
 ]

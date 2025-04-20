@@ -1,48 +1,39 @@
 import { observer } from 'mobx-react-lite'
 import { Column } from '@ant-design/charts'
-import { JSX, useContext } from 'react'
-import { Context } from '../../../App'
-import { StoresType } from '../../../types/StoresType'
+import { JSX, useEffect, useState } from 'react'
 import BackButton from '../BackButton'
 import styles from './TicketsChart.module.scss'
+import BookingApi from '../../../http/BookingApi'
+import { TicketsSold } from '../../../types/TicketsSold'
 
 const TicketsChart = (): JSX.Element => {
-  const { seatStore, sessionStore, movieStore, hallStore } = useContext(Context) as StoresType
+  const [data, setData] = useState<TicketsSold[]>([])
 
-  const getChartData = () => {
-    const sessions = sessionStore.getSessions()
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await BookingApi.get_tickets_sold()
 
-    const moviesData = sessions.reduce((acc, session) => {
-      const movie = movieStore.getMovies().find(m => m.id === session.movieId)
-      const hall = hallStore.getHalls().find(h => h.id === session.hallId)
+      const formattedData = data.map(item => {
+        return {
+          name: item[0],
+          tickets_sold: item[1],
+        }
+      })
 
-      const soldTickets = seatStore
-        .getSeats()
-        .filter(seat => seat.hallId === hall?.id && seat.isBooked).length
+      setData(formattedData)
 
-      const movieName = movie?.name ?? ''
+    }
 
-      if (acc[movieName]) {
-        acc[movieName] += soldTickets
-      } else {
-        acc[movieName] = soldTickets
-      }
+    fetchData()
+  }, [])
 
-      return acc
-    }, {} as Record<string, number>)
-
-    return Object.entries(moviesData).map(([movie, tickets]) => ({
-      movie,
-      tickets,
-    }))
-  }
+  console.log(data)
 
   const config = {
     theme: 'dark',
-    data: getChartData(),
-    xField: 'movie',
-    yField: 'tickets',
-    columnWidth: 5,
+    data: data,
+    xField: 'name',
+    yField: 'tickets_sold',
   }
 
   return (

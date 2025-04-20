@@ -1,3 +1,4 @@
+import { BookingStore } from '../store/BookingStore'
 import { GenreStore } from '../store/GenreStore'
 import { HallStore } from '../store/HallStore'
 import { ImageStore } from '../store/ImageStore'
@@ -14,4 +15,5 @@ export interface StoresType {
   hallStore: HallStore
   seatStore: SeatStore
   userStore: UserStore
+  bookingStore: BookingStore
 }

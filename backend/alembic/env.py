@@ -13,6 +13,7 @@ from model.Session import Session
 from model.Hall import Hall
 from model.Seat import Seat
 from model.User import User
+from model.Booking import Booking
 
 from config.DbConfig import dbSettings
 

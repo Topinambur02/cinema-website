@@ -7,6 +7,7 @@ from controller.MovieController import movie_router
 from controller.ImageController import image_router
 from controller.GenreController import genre_router
 from controller.SessionController import session_router
+from controller.BookingController import booking_router
 
 api_router = APIRouter(prefix='/api')
 
@@ -18,3 +19,4 @@ api_router.include_router(seat_router, prefix='/seat', tags=['seat'])
 api_router.include_router(session_router, prefix='/session', tags=['session'])
 api_router.include_router(auth_router, prefix='/auth', tags=['auth'])
 api_router.include_router(user_router, prefix='/user', tags=['user'])
+api_router.include_router(booking_router, prefix='/booking', tags=['booking'])
