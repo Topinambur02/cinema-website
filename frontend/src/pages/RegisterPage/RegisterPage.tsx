@@ -1,5 +1,5 @@
 import { JSX } from 'react'
-import RegisterForm from '../../components/RegisterForm/RegisterForm'
+import RegisterForm from '../../components/registerForm/RegisterForm'
 import Layout from '../Layout'
 
 const RegisterPage = (): JSX.Element => {

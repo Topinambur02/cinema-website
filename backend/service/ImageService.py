@@ -1,5 +1,5 @@
 from exception.ImageNotFoundException import ImageNotFoundException
-from dto.ImageDTO import ImageDTO
+from DTO.ImageDTO import ImageDTO
 from repository.ImageRepository import repository
 from mapper.ImageMapper import ImageMapper as mapper
 from config.MinioConfig import minio

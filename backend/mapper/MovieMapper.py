@@ -1,5 +1,5 @@
 from model.Base import ModelType
-from dto.MovieDTO import DTOType
+from DTO.MovieDTO import DTOType
 
 class MovieMapper:
     @classmethod

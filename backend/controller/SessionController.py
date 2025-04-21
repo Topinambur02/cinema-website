@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from service.SessionService import service
 from dependencies.Security import admin_dependency
-from dto.SessionDTO import (
+from DTO.SessionDTO import (
     CreateSessionDTO, 
     SessionDTO, 
     UpdateSessionDTO

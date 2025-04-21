@@ -1,4 +1,4 @@
-from dto.GenreDTO import DTOType
+from DTO.GenreDTO import DTOType
 from model.Base import ModelType
 
 class GenreMapper:

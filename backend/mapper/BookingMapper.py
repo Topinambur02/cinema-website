@@ -1,5 +1,5 @@
 from model.Base import ModelType
-from dto.BookingDTO import DTOType
+from DTO.BookingDTO import DTOType
 
 class BookingMapper:
     @classmethod

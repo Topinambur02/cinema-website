@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from service.GenreService import service
 from dependencies.Security import admin_dependency
-from dto.GenreDTO import (
+from DTO.GenreDTO import (
     CreateGenreDTO, 
     UpdateGenreDTO, 
     GenreDTO

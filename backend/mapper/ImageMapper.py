@@ -1,4 +1,4 @@
-from dto.ImageDTO import DTOType
+from DTO.ImageDTO import DTOType
 from model.Base import ModelType
 
 class ImageMapper:

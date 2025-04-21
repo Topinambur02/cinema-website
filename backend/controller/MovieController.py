@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from service.MovieService import service
 from dependencies.Security import admin_dependency
-from dto.MovieDTO import (
+from DTO.MovieDTO import (
     MovieDTO, 
     CreateMovieDTO, 
     UpdateMovieDTO

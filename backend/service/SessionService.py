@@ -2,7 +2,7 @@ from exception.SessionNotFoundException import SessionNotFoundException
 from repository.SessionRepository import repository
 from service.MovieService import service as movie_service
 from mapper.SessionMapper import SessionMapper as mapper
-from dto.SessionDTO import (
+from DTO.SessionDTO import (
     CreateSessionDTO, 
     SessionDTO, 
     UpdateSessionDTO

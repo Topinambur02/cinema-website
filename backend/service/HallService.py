@@ -1,10 +1,8 @@
-from dto.BookingDTO import CreateBookingDTO
-from dto.SeatDTO import CreateSeatDTO
+from DTO.SeatDTO import CreateSeatDTO
 from exception.HallNotFoundException import HallNotFoundException
-from dto.HallDTO import CreateHallDTO, HallDTO, UpdateHallDTO
+from DTO.HallDTO import CreateHallDTO, HallDTO, UpdateHallDTO
 from repository.HallRepository import repository
 from service.SeatService import service as seat_service
-from service.BookingService import service as booking_service
 from mapper.HallMapper import HallMapper as mapper
 
 class HallService:
@@ -47,7 +45,7 @@ class HallService:
         return mapper.to_dto(dto_model=HallDTO, orm_model=updated_hall)
     
     async def delete(self, id: int) -> HallDTO:
-        hall = await service.get_by_id(id)
+        await service.get_by_id(id)
         deleted_hall = await repository.delete(id)
         
         return mapper.to_dto(dto_model=HallDTO, orm_model=deleted_hall)

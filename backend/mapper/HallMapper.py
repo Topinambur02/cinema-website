@@ -1,4 +1,4 @@
-from dto.HallDTO import DTOType
+from DTO.HallDTO import DTOType
 from model.Base import ModelType
 
 class HallMapper:

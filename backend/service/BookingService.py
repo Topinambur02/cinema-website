@@ -2,7 +2,7 @@ from typing import List
 from model.Booking import Booking
 from model.User import User
 from exception.BookingNotFoundException import BookingNotFoundException
-from dto.BookingDTO import BookingDTO, CreateBookingDTO, UpdateBookingDTO
+from DTO.BookingDTO import BookingDTO, CreateBookingDTO, UpdateBookingDTO
 from repository.BookingRepository import repository
 from service.SeatService import service as seat_service
 from mapper.BookingMapper import BookingMapper as mapper
