@@ -1,0 +1,34 @@
+"""Add Genres table
+
+Revision ID: 23769559f9e8
+Revises: 2f4216fb13dc
+Create Date: 2025-03-11 21:34:52.236726
+
+"""
+from typing import Sequence, Union
+
+from alembic import op
+import sqlalchemy as sa
+
+revision: str = '23769559f9e8'
+down_revision: Union[str, None] = '2f4216fb13dc'
+branch_labels: Union[str, Sequence[str], None] = None
+depends_on: Union[str, Sequence[str], None] = None
+
+def upgrade() -> None:
+    op.create_table('genre',
+    sa.Column('name', sa.String(), nullable=False),
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('movie_genre',
+    sa.Column('movie_id', sa.Integer(), nullable=False),
+    sa.Column('genre_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['genre_id'], ['genre.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['movie_id'], ['movie.id'], ondelete='CASCADE'),
+    sa.PrimaryKeyConstraint('movie_id', 'genre_id')
+    )
+
+def downgrade() -> None:
+    op.drop_table('movie_genre')
+    op.drop_table('genre')

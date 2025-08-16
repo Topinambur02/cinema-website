@@ -1,0 +1,47 @@
+@use '../../scss/variables';
+
+h1 {
+  margin-top: 48px;
+  font-size: 40px;
+}
+
+.contactBlock {
+  .tel {
+    font-size: 64px;
+    margin-top: 24px;
+    display: inline-block;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .row {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+
+    .blocks {
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      max-width: 33.333333%;
+
+      .item {
+        margin-top: 40px;
+
+        .title {
+          font-weight: bold;
+          font-size: 24px;
+        }
+
+        a {
+          display: inline-block;
+          margin-top: 16px;
+          color: variables.$light-blue;
+          font-weight: 600;
+          font-size: 18px;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

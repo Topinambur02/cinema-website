@@ -1,0 +1,16 @@
+@use '../../scss/variables';
+
+footer {
+  background: variables.$black;
+  color: variables.$grey;
+
+  .container {
+    padding-left: 16px;
+
+    .wrapper {
+      height: 40px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

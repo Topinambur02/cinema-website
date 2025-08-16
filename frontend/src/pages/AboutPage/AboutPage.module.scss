@@ -1,0 +1,62 @@
+@use '../../scss/variables';
+
+h1 {
+  margin-top: 24px;
+  font-size: 40px;
+}
+
+.aboutBlock {
+  .progressList {
+    display: flex;
+    margin: 0 -8px;
+    padding-top: 8px;
+
+    .item {
+      width: calc(25% - 16px);
+      padding: 16px 16px 60px;
+      margin: 16px 8px 0;
+      background: variables.$black;
+      border-radius: 16px;
+      font-weight: bold;
+      font-size: 18px;
+
+      .value {
+        margin-bottom: 8px;
+        font-size: 40px;
+        margin-right: 13px;
+      }
+    }
+  }
+
+  .row {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+
+    .block {
+      max-width: 33.333333%;
+      padding-left: 15px;
+      padding-right: 15px;
+
+      .title {
+        margin-top: 32px;
+        font-weight: bold;
+        font-size: 24px;
+      }
+
+      .text {
+        .paragraph {
+          font-weight: 500;
+          margin-top: 40px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+.rb {
+  background: variables.$red;
+  padding-left: 5px;
+  color: variables.$white;
+}

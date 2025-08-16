@@ -1,0 +1,37 @@
+"""add session table and add description column to movie
+
+Revision ID: 758ddb813c10
+Revises: 23769559f9e8
+Create Date: 2025-03-24 15:18:29.540666
+
+"""
+from typing import Sequence, Union
+
+from alembic import op
+import sqlalchemy as sa
+
+revision: str = '758ddb813c10'
+down_revision: Union[str, None] = '23769559f9e8'
+branch_labels: Union[str, Sequence[str], None] = None
+depends_on: Union[str, Sequence[str], None] = None
+
+def upgrade() -> None:
+    op.create_table('session',
+    sa.Column('startTime', sa.DateTime(), nullable=False),
+    sa.Column('endTime', sa.DateTime(), nullable=False),
+    sa.Column('movieId', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['movieId'], ['movie.id'], ondelete='NO ACTION'),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.add_column('movie', sa.Column('description', sa.TEXT(), nullable=False))
+    op.drop_constraint('movie_genre_genre_id_fkey', 'movie_genre', type_='foreignkey')
+    op.drop_constraint('movie_genre_movie_id_fkey', 'movie_genre', type_='foreignkey')
+
+def downgrade() -> None:
+    op.drop_constraint(None, 'movie_genre', type_='foreignkey')
+    op.drop_constraint(None, 'movie_genre', type_='foreignkey')
+    op.create_foreign_key('movie_genre_movie_id_fkey', 'movie_genre', 'movie', ['movie_id'], ['id'], ondelete='CASCADE')
+    op.create_foreign_key('movie_genre_genre_id_fkey', 'movie_genre', 'genre', ['genre_id'], ['id'], ondelete='CASCADE')
+    op.drop_column('movie', 'description')
+    op.drop_table('session')

@@ -1,0 +1,62 @@
+@use '../../scss/variables';
+
+.header {
+  margin-top: 20px;
+
+  .container {
+    padding-left: 16px;
+
+    .wrapper {
+      height: 40px;
+      display: flex;
+      align-items: center;
+
+      .logo {
+        width: 100px;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .city {
+        margin-left: 40px;
+
+        .cityLink {
+          display: inline-flex;
+          align-items: center;
+          text-decoration: none;
+          color: variables.$blue;
+          font-weight: 600;
+          height: 56px;
+
+          .icon {
+            margin-right: 8px;
+            color: variables.$white;
+          }
+        }
+      }
+
+      .auth {
+        display: flex;
+        margin-left: auto;
+      }
+
+      .user {
+        background-color: variables.$black;
+        border-radius: 12px;
+        height: 40px;
+        padding: 0 8px;
+        display: flex;
+        align-items: center;
+        margin: 0px 16px 0px auto;
+
+        .userIcon {
+          margin-left: 7px;
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }
+}

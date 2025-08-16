@@ -1,0 +1,28 @@
+@use '../../scss/variables';
+
+.pageControl {
+  height: auto;
+  padding: 16px 0;
+  margin: 0;
+
+  a {
+    color: variables.$grey;
+    font-weight: 600;
+    line-height: 20px;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    height: 24px;
+    transition: all 300ms ease;
+  }
+}
+
+.filmBoard {
+  margin: 0;
+  position: relative;
+}
+
+.sessionBox {
+  margin-top: 14px;
+  width: 20%;
+}

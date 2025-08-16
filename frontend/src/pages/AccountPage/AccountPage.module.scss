@@ -1,0 +1,28 @@
+@use '../../scss/variables';
+
+.email {
+  margin-top: 20px;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+
+  .logout {
+    margin-top: 28px;
+    height: 56px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    position: relative;
+    display: inline-block;
+    width: 300px;
+    padding: 0 32px;
+    background: variables.$red;
+    border-radius: 16px;
+    text-align: center;
+    color: variables.$white;
+    cursor: pointer;
+    border: none;
+  }
+}
