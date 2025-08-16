@@ -1,7 +1,7 @@
-from dto.HallDTO import UpdateHallDTO
+from DTO.HallDTO import UpdateHallDTO
 from exception.HallNotFoundException import HallNotFoundException
 from exception.SeatNotFoundException import SeatNotFoundException
-from dto.SeatDTO import CreateSeatDTO, SeatDTO, UpdateSeatDTO
+from DTO.SeatDTO import CreateSeatDTO, SeatDTO, UpdateSeatDTO
 from repository.SeatRepository import repository
 from repository.HallRepository import repository as hall_repository
 from mapper.SeatMapper import SeatMapper as mapper

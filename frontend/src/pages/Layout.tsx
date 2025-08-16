@@ -1,5 +1,5 @@
 import { JSX } from 'react'
-import Menu from '../components/Menu/Menu'
+import Menu from '../components/menu/Menu'
 import { LayoutProps } from '../types/props/LayoutProps'
 import styles from './Layout.module.scss'
 

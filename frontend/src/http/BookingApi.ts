@@ -1,7 +1,6 @@
 import $host from "."
 import { BookingType } from "../types/BookingType"
 import { CreateBookingType } from "../types/CreateBookingType"
-import { TicketsSold } from "../types/TicketsSold"
 import { UpdateBookingType } from "../types/UpdateBookingType"
 
 class BookingApi{

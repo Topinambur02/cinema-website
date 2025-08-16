@@ -2,7 +2,7 @@ from fastapi import UploadFile
 from service.ImageService import service
 from dependencies.Security import admin_dependency
 from fastapi import APIRouter
-from dto.ImageDTO import ImageDTO
+from DTO.ImageDTO import ImageDTO
 
 image_router = APIRouter()
 

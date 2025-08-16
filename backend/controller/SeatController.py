@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from service.SeatService import service
 from dependencies.Security import admin_dependency
-from dto.SeatDTO import (
+from DTO.SeatDTO import (
     CreateSeatDTO, 
     SeatDTO, 
     UpdateSeatDTO

@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi_users import FastAPIUsers
 from auth.auth_backend import auth_backend
 from auth.user_manager import get_user_manager
-from dto.UserDTO import CreateUserDTO, UserDTO
+from DTO.UserDTO import CreateUserDTO, UserDTO
 from model.User import User
 
 fastapi_users = FastAPIUsers[User, int](

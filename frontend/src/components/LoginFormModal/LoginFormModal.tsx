@@ -1,5 +1,5 @@
 import styles from './LoginFormModal.module.scss'
-import LoginForm from '../LoginForm/LoginForm'
+import LoginForm from '../loginForm/LoginForm'
 import { LoginFormModalProps } from '../../types/props/LoginFormModalProps'
 import { JSX, MouseEvent } from 'react'
 

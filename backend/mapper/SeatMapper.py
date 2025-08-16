@@ -1,4 +1,4 @@
-from dto.SeatDTO import DTOType
+from DTO.SeatDTO import DTOType
 from model.Base import ModelType
 
 class SeatMapper:

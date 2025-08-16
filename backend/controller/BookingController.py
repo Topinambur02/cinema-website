@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Depends
-from model.Booking import Booking
 from enums.Role import Role
 from model.User import User
-from dto.BookingDTO import BookingDTO, CreateBookingDTO, UpdateBookingDTO
+from DTO.BookingDTO import BookingDTO, CreateBookingDTO, UpdateBookingDTO
 from dependencies.Security import admin_dependency, role_required
 from service.BookingService import service
 from typing import List

@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from service.HallService import service
 from dependencies.Security import admin_dependency
-from dto.HallDTO import (
+from DTO.HallDTO import (
     CreateHallDTO, 
     HallDTO, 
     UpdateHallDTO

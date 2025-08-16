@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import { ADMIN_ROUTE } from './constants/routes'
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
+import Header from './components/header/Header'
+import Footer from './components/footer/Footer'
 import AppRouter from './components/AppRouter'
 import { JSX } from 'react'
 

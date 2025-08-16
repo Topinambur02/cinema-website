@@ -1,5 +1,5 @@
 from exception.GenreNotFoundException import GenreNotFoundException
-from dto.GenreDTO import GenreDTO, CreateGenreDTO, UpdateGenreDTO
+from DTO.GenreDTO import GenreDTO, CreateGenreDTO, UpdateGenreDTO
 from mapper.GenreMapper import GenreMapper as mapper
 from repository.GenreRepository import repository
 

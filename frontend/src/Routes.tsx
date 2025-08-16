@@ -2,7 +2,6 @@ import {
   ABOUT_ROUTE,
   ACCOUNT_ROUTE,
   ADMIN_ROUTE,
-  CINEMAS_ROUTE,
   CONTACT_ROUTE,
   LOGIN_ROUTE,
   MAIN_ROUTE,
@@ -14,7 +13,6 @@ import {
 import MainPage from './pages/MainPage/MainPage'
 import ContactPage from './pages/ContactPage/ContactPage'
 import AboutPage from './pages/AboutPage/AboutPage'
-import CinemaPage from './pages/CinemaPage/CinemaPage'
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
 import MoviePage from './pages/MoviePage/MoviePage'
 import TicketsPage from './pages/TicketsPage/TicketsPage'
@@ -35,10 +33,6 @@ export const publicRoutes = [
   {
     path: ABOUT_ROUTE,
     component: <AboutPage />,
-  },
-  {
-    path: CINEMAS_ROUTE,
-    component: <CinemaPage />,
   },
   {
     path: NOT_FOUND_ROUTE,

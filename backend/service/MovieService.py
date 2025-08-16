@@ -7,7 +7,7 @@ from service.GenreService import service as genre_service
 from service.ImageService import service as image_service
 from mapper.MovieMapper import MovieMapper as mapper
 from mapper.GenreMapper import GenreMapper as genre_mapper
-from dto.MovieDTO import (
+from DTO.MovieDTO import (
     MovieDTO, 
     CreateMovieDTO, 
     UpdateMovieDTO

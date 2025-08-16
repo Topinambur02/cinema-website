@@ -1,5 +1,5 @@
 import { JSX } from 'react'
-import LoginForm from '../../components/LoginForm/LoginForm'
+import LoginForm from '../../components/loginForm/LoginForm'
 import Layout from '../Layout'
 
 const LoginPage = (): JSX.Element => {
